@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "meshtastic-diy 1W")(type KiCad)(uri "${KIPRJMOD}/meshtastic-diy 1W.pretty")(options "")(descr ""))
+)

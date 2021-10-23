@@ -1,0 +1,13 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP E22-900M30S
+D SX1262 LoRa RF Modem
+K SX1262 868/915MHz 1W SPI LoRa Module
+F https://www.ebyte.com/en/downpdf.aspx?id=453
+$ENDCMP
+#
+$CMP SY7088
+F asd
+$ENDCMP
+#
+#End Doc Library
