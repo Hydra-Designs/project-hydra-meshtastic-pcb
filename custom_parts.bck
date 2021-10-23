@@ -6,8 +6,14 @@ K SX1262 868/915MHz 1W SPI LoRa Module
 F https://www.ebyte.com/en/downpdf.aspx?id=453
 $ENDCMP
 #
+$CMP PAM2312
+D DC/DC step down
+$ENDCMP
+#
 $CMP SY7088
-F asd
+D Step up DC DC Converter 3a pk
+K dc/dc step up
+F https://datasheet.lcsc.com/lcsc/2108131730_Silergy-Corp-SY7088DGC_C178240.pdf
 $ENDCMP
 #
 #End Doc Library
