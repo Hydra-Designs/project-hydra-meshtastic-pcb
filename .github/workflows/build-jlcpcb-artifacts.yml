@@ -1,0 +1,32 @@
+name: Build JLCPCB Artifacts
+
+on:
+  push:
+    paths:
+    - '**.sch'
+    - '**.kicad_pcb'
+  pull_request:
+    paths:
+      - '**.sch'
+      - '**.kicad_pcb'
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: INTI-CMNB/KiBot@v1
+      with:
+      # Required - kibot config file
+        config: jlcpcb.config.kibot.yaml
+      # optional - prefix to output defined in config
+        dir: output
+      # optional - schematic file
+        schema: '*.sch'
+      # optional - PCB design file
+        board: '*.kicad_pcb'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: output
+        path: output
