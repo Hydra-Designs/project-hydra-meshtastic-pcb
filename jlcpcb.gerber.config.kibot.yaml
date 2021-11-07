@@ -37,8 +37,6 @@ outputs:
       - In4.Cu
       - In5.Cu
       - In6.Cu
-      - F.SilkS
-      - B.SilkS
       - F.Mask
       - B.Mask
       - Edge.Cuts
