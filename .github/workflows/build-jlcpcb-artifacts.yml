@@ -3,8 +3,8 @@ name: Build JLCPCB Artifacts
 on:
   push:
     paths:
-    - '**.*'
-    - '**.*'
+    - '**.sch'
+    - '**.kicad_pcb'
 
 jobs:
           
