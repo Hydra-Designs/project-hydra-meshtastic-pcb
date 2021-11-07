@@ -60,7 +60,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: BOM.zip
-          path: BOM/
+          path: ./
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -71,16 +71,16 @@ jobs:
           release_name: Release ${{ env.NOW }}
           draft: false
           prerelease: true
-      - name: Upload Release Gerber
-        id: upload-release-gerber 
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: Gerber/
-          asset_name: Gerber.zip
-          asset_content_type: application/zip
+      # - name: Upload Release Gerber
+      #   id: upload-release-gerber 
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+      #     asset_path: Gerber/
+      #     asset_name: Gerber.zip
+      #     asset_content_type: application/zip
       - name: Upload Release BOM
         id: upload-release-bom 
         uses: actions/upload-release-asset@v1
@@ -88,6 +88,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: BOM/
-          asset_name: BOM.zip
-          asset_content_type: application/zip
+          asset_path: ./meshtastic-diy_bom_jlc.csv
+          asset_name: BOM.csv
+      - name: Upload Release CPL
+        id: upload-release-cpl 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./meshtastic-diy_cpl_jlc.csv
+          asset_name: CPL.csv
