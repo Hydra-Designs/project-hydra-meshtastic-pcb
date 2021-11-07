@@ -11,19 +11,58 @@ on:
       - '**.kicad_pcb'
 
 jobs:
-  Build:
+
+  Build-Gerber:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: INTI-CMNB/KiBot@v1
       with:
         config: jlcpcb.gerber.config.kibot.yaml
-      # optional - prefix to output defined in config
         dir: Gerber
         schema: '*.sch'
         board: '*.kicad_pcb'
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
+
+  Build-BOM:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: INTI-CMNB/KiBot@v1
       with:
-        name: Gerber
-        path: Gerber
+        config: jlcpcb.bom.config.kibot.yaml
+        dir: BOM
+        schema: '*.sch'
+        board: '*.kicad_pcb'
+
+  Release:
+    name: Upload Release Asset
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Gerber
+        id: upload-release-gerber 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_name: Gerber.zip
+          asset_content_type: application/zip
+      - name: Upload Release BOM
+        id: upload-release-bom 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_name: BOM.zip
+          asset_content_type: application/zip
