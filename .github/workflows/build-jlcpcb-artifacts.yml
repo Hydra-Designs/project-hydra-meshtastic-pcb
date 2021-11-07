@@ -18,6 +18,11 @@ jobs:
         dir: Gerber
         schema: '*.sch'
         board: '*.kicad_pcb'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Gerber.zip
+        path: Gerber
 
   Build-BOM:
     runs-on: ubuntu-latest
@@ -29,6 +34,11 @@ jobs:
         dir: BOM
         schema: '*.sch'
         board: '*.kicad_pcb'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: BOM.zip
+        path: BOM
 
   Release-Artifacts:
     name: Release Artifacts
@@ -39,6 +49,19 @@ jobs:
     steps:
       - name: set env
         run: echo "::set-env name=NOW::v$(date +'%Y%m%d.%H%M%S')"
+      - name: Download Gerber
+        id: download_gerber
+        uses: actions/download-artifact@master
+        with:
+          name: Gerber.zip
+          path: Gerber
+      - name: Download BOM
+        id: download_bom
+        uses: actions/download-artifact@master
+        with:
+          name: BOM.zip
+          path: BOM
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -56,7 +79,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./Gerber.zip
+          asset_path: ./Gerber
           asset_name: Gerber.zip
           asset_content_type: application/zip
       - name: Upload Release BOM
