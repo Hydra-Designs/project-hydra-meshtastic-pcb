@@ -1,4 +1,4 @@
-name: Build JLCPCB Artifacts
+name: Build JLCPCB Gerber
 
 on:
   push:
@@ -11,8 +11,8 @@ on:
       - '**.*'
 
 jobs:
-
-  Build:
+          
+  Build-Gerber:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -22,6 +22,10 @@ jobs:
         dir: Gerber
         schema: '*.sch'
         board: '*.kicad_pcb'
+
+  Build-BOM:
+    runs-on: ubuntu-latest
+    steps:
     - uses: actions/checkout@v2
     - uses: INTI-CMNB/KiBot@v1
       with:
@@ -30,10 +34,10 @@ jobs:
         schema: '*.sch'
         board: '*.kicad_pcb'
 
-  Release:
-    needs: Build
-    name: Upload Release Asset
+  Release-Artifacts:
+    name: Release Artifacts
     runs-on: ubuntu-latest
+    needs: Build-Gerber
     steps:
       - name: Create Release
         id: create_release
@@ -52,16 +56,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: Gerber
           asset_name: Gerber.zip
-          asset_content_type: application/zip
-      - name: Upload Release BOM
-        id: upload-release-bom 
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: BOM
-          asset_name: BOM.zip
           asset_content_type: application/zip
