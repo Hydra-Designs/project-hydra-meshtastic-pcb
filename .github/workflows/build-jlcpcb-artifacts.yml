@@ -61,6 +61,8 @@ jobs:
         with:
           name: BOM.zip
           path: ./
+      - name: Show artifacts # For diagnostics
+        run: ls -lR 
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
