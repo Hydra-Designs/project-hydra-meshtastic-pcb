@@ -54,11 +54,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: Gerber.zip
-          path: ./Gerber
-      - name: Dir
-        run: ls
-      - name: Zip Gerber
-        run: zip -r Gerber.zip ./Gerber
+          path: ./
       - name: Download BOM
         id: download_bom
         uses: actions/download-artifact@master
@@ -102,6 +98,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./Gerber.zip
+          asset_path: ./JLCPCB/meshtastic-diy-JLCPCB.zip"
           asset_name: Gerber.zip
           asset_content_type: application/zip
