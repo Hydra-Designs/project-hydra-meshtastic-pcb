@@ -55,6 +55,8 @@ jobs:
         with:
           name: Gerber.zip
           path: ./
+      - name: Zip Gerber
+        run: zip -r Gerber.zip
       - name: Download BOM
         id: download_bom
         uses: actions/download-artifact@master
