@@ -6,7 +6,7 @@ encoding utf-8
 Sheet 1 1
 Title "Meshtastic DIY 1W board"
 Date "2021-10-28"
-Rev "0.1"
+Rev "0.11"
 Comp ""
 Comment1 ""
 Comment2 ""
