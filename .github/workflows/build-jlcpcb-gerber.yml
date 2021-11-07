@@ -37,6 +37,8 @@ jobs:
   Release-Artifacts:
     name: Release Artifacts
     runs-on: ubuntu-latest
+    env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     needs: [Build-Gerber, Build-BOM]
     steps:
       - name: set env
