@@ -17,16 +17,13 @@ jobs:
     - uses: actions/checkout@v2
     - uses: INTI-CMNB/KiBot@v1
       with:
-      # Required - kibot config file
-        config: jlcpcb.config.kibot.yaml
+        config: jlcpcb.gerber.config.kibot.yaml
       # optional - prefix to output defined in config
-        dir: output
-      # optional - schematic file
+        dir: Gerber
         schema: '*.sch'
-      # optional - PCB design file
         board: '*.kicad_pcb'
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: output
-        path: output
+        name: Gerber
+        path: Gerber
