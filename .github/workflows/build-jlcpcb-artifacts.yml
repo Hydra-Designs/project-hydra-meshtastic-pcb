@@ -54,13 +54,13 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: Gerber.zip
-          path: Gerber
+          path: ./
       - name: Download BOM
         id: download_bom
         uses: actions/download-artifact@master
         with:
           name: BOM.zip
-          path: BOM
+          path: ./
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
