@@ -1,0 +1,27 @@
+name: Build JLCPCB Gerber
+
+on:
+  push:
+    paths:
+      - '**.*'
+  pull_request:
+    paths:
+      - '**.*'
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: INTI-CMNB/KiBot@v1
+      with:
+        config: jlcpcb.bom.config.kibot.yaml
+      # optional - prefix to output defined in config
+        dir: BOM
+        schema: '*.sch'
+        board: '*.kicad_pcb'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: BOM
+        path: BOM
