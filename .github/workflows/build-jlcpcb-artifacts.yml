@@ -1,4 +1,4 @@
-name: Build JLCPCB Artifacts
+name: Build JLCPCB Gerber
 
 on:
   push:
