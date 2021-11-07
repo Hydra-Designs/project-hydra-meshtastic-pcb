@@ -1,4 +1,4 @@
-name: Build JLCPCB Gerber
+name: Build JLCPCB BOM
 
 on:
   push:
