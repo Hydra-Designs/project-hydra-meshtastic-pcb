@@ -71,16 +71,6 @@ jobs:
           release_name: Release ${{ env.NOW }}
           draft: false
           prerelease: true
-      # - name: Upload Release Gerber
-      #   id: upload-release-gerber 
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-      #     asset_path: Gerber/
-      #     asset_name: Gerber.zip
-      #     asset_content_type: application/zip
       - name: Upload Release BOM
         id: upload-release-bom 
         uses: actions/upload-release-asset@v1
@@ -101,3 +91,13 @@ jobs:
           asset_path: ./meshtastic-diy_cpl_jlc.csv
           asset_name: meshtastic-diy_cpl_jlc.csv
           asset_content_type: text/csv
+      # - name: Upload Release Gerber
+      #   id: upload-release-gerber 
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+      #     asset_path: Gerber/
+      #     asset_name: Gerber.zip
+      #     asset_content_type: application/zip
