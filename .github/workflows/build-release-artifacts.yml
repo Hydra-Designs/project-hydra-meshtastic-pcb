@@ -1,4 +1,4 @@
-name: Build Artifacts
+name: Build and Release Artifacts
 
 on:
   push:
