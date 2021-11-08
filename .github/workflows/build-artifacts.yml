@@ -20,6 +20,8 @@ jobs:
         dir: Gerber
         schema: '*.sch'
         board: '*.kicad_pcb'
+    - name: Show artifacts # For diagnostics
+      run: ls -lR 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
@@ -36,6 +38,8 @@ jobs:
         dir: BOM
         schema: '*.sch'
         board: '*.kicad_pcb'
+    - name: Show artifacts # For diagnostics
+      run: ls -lR 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
@@ -52,6 +56,8 @@ jobs:
         dir: Render
         schema: '*.sch'
         board: '*.kicad_pcb'
+    - name: Show artifacts # For diagnostics
+      run: ls -lR 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
