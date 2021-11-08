@@ -12,7 +12,14 @@ A minimalist PCB design built around the Ebyte E22-900M30S 30dbm (1 watt) LoRA r
 - Supports up to 30dbm (1 watt) transmit power
 - OLED support via I2C
 - GPS support via UART
-- Programmable via USB-Serial programmer
+- User button via pin header
+- Switchable 3.3V power rail (GPS power saving)
+- ADC input for battery voltage sensing
+- Single 5V input (no reverse polarity and overvoltage protection!)
+- Two GPIO reserved for future use (for example power control)
+- Programmable via USB-Serial adapter (RTS/DTR are required for the on-board auto reset!)
+- Compatible with "meshtastic-diy-v1" target
+
 ## Contributing
 
 Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/PlumRugOfDoom/project-hydra-meshtastic-pcb/compare/).
