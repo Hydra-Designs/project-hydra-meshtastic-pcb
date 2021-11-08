@@ -41,6 +41,23 @@ jobs:
       with:
         name: BOM.zip
         path: BOM
+        
+  Build-Renders:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: INTI-CMNB/KiBot@v1
+      with:
+        config: jlcpcb.render.config.kibot.yaml
+        dir: Render
+        schema: '*.sch'
+        board: '*.kicad_pcb'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Render.zip
+        path: Render       
+
 
   Release-Artifacts:
     name: Release Artifacts
@@ -64,6 +81,13 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: BOM.zip
+          path: ./
+               
+      - name: Download Render
+        id: download_render
+        uses: actions/download-artifact@master
+        with:
+          name: Render.zip
           path: ./
           
       - name: Show artifacts # For diagnostics
@@ -111,8 +135,8 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./BOM/meshtastic-diy-ibom.html
           asset_name: Interactive-BoM.html
-          asset_content_type: application/zip
-
+          asset_content_type: text/html
+          
       - name: Upload Release Gerber
         id: upload-release-gerber 
         uses: actions/upload-release-asset@v1
