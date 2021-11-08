@@ -147,3 +147,47 @@ jobs:
           asset_path: ./JLCPCB/meshtastic-diy-JLCPCB.zip
           asset_name: Gerber-JLCPCB.zip
           asset_content_type: application/zip
+          
+      - name: Upload Release Schematic
+        id: upload-release-schematic 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./Schematic.pdf
+          asset_name: Schematic.pdf
+          asset_content_type: application/pdf
+          
+      - name: Upload Release STP
+        id: upload-release-stp 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./PCB-Model.stp
+          asset_name: PCB-Model.stp
+          asset_content_type: application/octet-stream
+          
+      - name: Upload Release Board Render Top
+        id: upload-release-render-top 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./PCB-Top.jpg
+          asset_name: PCB-Top.jpg
+          asset_content_type: image/jpeg
+          
+      - name: Upload Release Board Render Bottom
+        id: upload-release-render-bottom 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./PCB-Bottom.jpg
+          asset_name: PCB-Bottom.jpg
+          asset_content_type: image/jpeg
