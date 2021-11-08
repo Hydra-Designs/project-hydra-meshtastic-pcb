@@ -6,8 +6,7 @@
 
 A minimalist PCB design built around the Ebyte E22-900M30S 30dbm (1 watt) LoRA radio and the ESP32-WROOM-32U mpu compatible with the [Meshtastic-device](https://github.com/meshtastic/Meshtastic-device) firmware. 
 
-![image](https://user-images.githubusercontent.com/9000580/140793575-5eef9ffe-91b7-4b98-983c-4b032f3547e8.png)
-
+![image](https://user-images.githubusercontent.com/9000580/140797732-4bd02f65-b526-48d9-92bb-ef328034113d.png)
 
 ## Features
 - OLED support via I2C
