@@ -18,8 +18,8 @@ jobs:
       with:
         config: jlcpcb.gerber.config.kibot.yaml
         dir: Gerber
-        schema: '*.sch'
-        board: '*.kicad_pcb'
+        schema: 'meshtastic-diy.sch'
+        board: 'meshtastic-diy.kicad_pcb'
     - name: Show artifacts # For diagnostics
       run: ls -lR 
     - name: Upload artifacts
@@ -36,8 +36,8 @@ jobs:
       with:
         config: jlcpcb.bom.config.kibot.yaml
         dir: BOM
-        schema: '*.sch'
-        board: '*.kicad_pcb'
+        schema: 'meshtastic-diy.sch'
+        board: 'meshtastic-diy.kicad_pcb'
     - name: Show artifacts # For diagnostics
       run: ls -lR
     - name: Upload artifacts
@@ -54,8 +54,8 @@ jobs:
       with:
         config: jlcpcb.render.config.kibot.yaml
         dir: Render
-        schema: '*.sch'
-        board: '*.kicad_pcb'
+        schema: 'meshtastic-diy.sch'
+        board: 'meshtastic-diy.kicad_pcb'
     - name: Show artifacts # For diagnostics
       run: ls -lR 
     - name: Upload artifacts
