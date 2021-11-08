@@ -51,20 +51,24 @@ jobs:
     steps:
       - name: set env
         run: echo "::set-env name=NOW::$(date +'%Y.%m.%d.%H%M%S')"
+        
       - name: Download Gerber
         id: download_gerber
         uses: actions/download-artifact@master
         with:
           name: Gerber.zip
           path: ./
+          
       - name: Download BOM
         id: download_bom
         uses: actions/download-artifact@master
         with:
           name: BOM.zip
           path: ./
+          
       - name: Show artifacts # For diagnostics
         run: ls -lR 
+        
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -75,7 +79,8 @@ jobs:
           release_name: Release ${{ env.NOW }}
           draft: false
           prerelease: true
-      - name: Upload Release BOM
+          
+      - name: Upload Release BoM
         id: upload-release-bom 
         uses: actions/upload-release-asset@v1
         env:
@@ -83,8 +88,9 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./meshtastic-diy_bom_jlc.csv
-          asset_name: BOM-JLCPCB.csv
+          asset_name: BoM-JLCPCB.csv
           asset_content_type: text/csv
+          
       - name: Upload Release CPL
         id: upload-release-cpl 
         uses: actions/upload-release-asset@v1
@@ -95,6 +101,18 @@ jobs:
           asset_path: ./meshtastic-diy_cpl_jlc.csv
           asset_name: CPL-JLCPCB.csv
           asset_content_type: text/csv
+          
+      - name: Upload Release iBoM
+        id: upload-release-ibom 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./BOM/meshtastic-diy-ibom.html
+          asset_name: Interactive-BoM.html
+          asset_content_type: application/zip
+
       - name: Upload Release Gerber
         id: upload-release-gerber 
         uses: actions/upload-release-asset@v1
