@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-    needs: [Build-Gerber, Build-BOM]
+    needs: [Build-Gerber, Build-BOM, Build-Renders]
     steps:
       - name: set env
         run: echo "::set-env name=NOW::$(date +'%Y.%m.%d.%H%M%S')"
