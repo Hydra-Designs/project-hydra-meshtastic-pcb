@@ -9,10 +9,10 @@ A minimalist PCB design built around the Ebyte E22-900M30S 30dbm (1 watt) LoRA r
 ![image](https://user-images.githubusercontent.com/9000580/140797732-4bd02f65-b526-48d9-92bb-ef328034113d.png)
 
 ## Features
+- Supports up to 30dbm (1 watt) transmit power
 - OLED support via I2C
 - GPS support via UART
 - Programmable via USB-Serial programmer
-
 ## Contributing
 
 Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/PlumRugOfDoom/project-hydra-meshtastic-pcb/compare/).
