@@ -67,4 +67,4 @@ outputs:
     dir: BoM
     options:
       blacklist: 'DNF*'
-      name_format: '%f_%r_iBoM'
+      name_format: '%f_iBoM'
