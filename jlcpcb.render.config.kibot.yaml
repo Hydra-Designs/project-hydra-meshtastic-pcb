@@ -13,7 +13,6 @@ outputs:
   - name: board_top
     comment: "Top layer view"
     type: pcbdraw
-    dir: PCB
     options:
       format: jpg
       dpi: 300
