@@ -1,13 +1,6 @@
 kibot:
   version: 1
 
-preflight:
-  run_erc: true
-  update_xml: true
-  run_drc: true
-  check_zone_fills: true
-  ignore_unconnected: false
-
 outputs:
 
   - name: 'print_sch'
@@ -16,3 +9,27 @@ outputs:
     dir: .
     options:
       output: Schematic.pdf
+
+  - name: board_top
+    comment: "Top layer view"
+    type: pcbdraw
+    dir: PCB
+    options:
+      format: jpg
+      dpi: 300
+      output: PCB-Top.jpg
+
+  - name: board_bottom
+    comment: "Bottom layer view"
+    type: pcbdraw
+    options:
+      format: jpg
+      dpi: 300
+      bottom: true
+      output: PCB-Bottom.jpg
+
+  - name: 3D
+    comment: "STEP 3D model"
+    type: step
+    options:
+      output: PCB-Model.stp
