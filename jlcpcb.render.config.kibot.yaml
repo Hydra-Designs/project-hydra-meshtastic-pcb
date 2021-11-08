@@ -1,0 +1,34 @@
+kibot:
+  version: 1
+
+outputs:
+
+  - name: 'print_sch'
+    comment: "Print schematic (PDF)"
+    type: pdf_sch_print
+    dir: .
+    options:
+      output: Schematic.pdf
+
+  - name: board_top
+    comment: "Top layer view"
+    type: pcbdraw
+    options:
+      format: jpg
+      dpi: 300
+      output: PCB-Top.jpg
+
+  - name: board_bottom
+    comment: "Bottom layer view"
+    type: pcbdraw
+    options:
+      format: jpg
+      dpi: 300
+      bottom: true
+      output: PCB-Bottom.jpg
+
+  - name: 3D
+    comment: "STEP 3D model"
+    type: step
+    options:
+      output: PCB-Model.stp

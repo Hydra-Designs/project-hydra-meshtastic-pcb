@@ -1,0 +1,193 @@
+name: Build JLCPCB Artifacts
+
+on:
+  push:
+    paths:
+    - '**.sch'
+    - '**.kicad_pcb'
+    - '**.yml'
+    - '**.yaml'
+
+jobs:
+          
+  Build-Gerber:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: INTI-CMNB/KiBot@v1
+      with:
+        config: jlcpcb.gerber.config.kibot.yaml
+        dir: Gerber
+        schema: '*.sch'
+        board: '*.kicad_pcb'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Gerber.zip
+        path: Gerber
+
+  Build-BOM:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: INTI-CMNB/KiBot@v1
+      with:
+        config: jlcpcb.bom.config.kibot.yaml
+        dir: BOM
+        schema: '*.sch'
+        board: '*.kicad_pcb'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: BOM.zip
+        path: BOM
+        
+  Build-Renders:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: INTI-CMNB/KiBot@v1
+      with:
+        config: jlcpcb.render.config.kibot.yaml
+        dir: Render
+        schema: '*.sch'
+        board: '*.kicad_pcb'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Render.zip
+        path: Render       
+
+
+  Release-Artifacts:
+    name: Release Artifacts
+    runs-on: ubuntu-latest
+    env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+    needs: [Build-Gerber, Build-BOM, Build-Renders]
+    steps:
+      - name: set env
+        run: echo "::set-env name=NOW::$(date +'%Y.%m.%d.%H%M%S')"
+        
+      - name: Download Gerber
+        id: download_gerber
+        uses: actions/download-artifact@master
+        with:
+          name: Gerber.zip
+          path: ./
+          
+      - name: Download BOM
+        id: download_bom
+        uses: actions/download-artifact@master
+        with:
+          name: BOM.zip
+          path: ./
+               
+      - name: Download Render
+        id: download_render
+        uses: actions/download-artifact@master
+        with:
+          name: Render.zip
+          path: ./
+          
+      - name: Show artifacts # For diagnostics
+        run: ls -lR 
+        
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.NOW }}
+          release_name: Release ${{ env.NOW }}
+          draft: false
+          prerelease: true
+          
+      - name: Upload Release BoM
+        id: upload-release-bom 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./meshtastic-diy_bom_jlc.csv
+          asset_name: BoM-JLCPCB.csv
+          asset_content_type: text/csv
+          
+      - name: Upload Release CPL
+        id: upload-release-cpl 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./meshtastic-diy_cpl_jlc.csv
+          asset_name: CPL-JLCPCB.csv
+          asset_content_type: text/csv
+          
+      - name: Upload Release iBoM
+        id: upload-release-ibom 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./BoM/meshtastic-diy-ibom.html
+          asset_name: Interactive-BoM.html
+          asset_content_type: text/html
+          
+      - name: Upload Release Gerber
+        id: upload-release-gerber 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./JLCPCB/meshtastic-diy-JLCPCB.zip
+          asset_name: Gerber-JLCPCB.zip
+          asset_content_type: application/zip
+          
+      - name: Upload Release Schematic
+        id: upload-release-schematic 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./Schematic.pdf
+          asset_name: Schematic.pdf
+          asset_content_type: application/pdf
+          
+      - name: Upload Release STP
+        id: upload-release-stp 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./PCB-Model.stp
+          asset_name: PCB-Model.stp
+          asset_content_type: application/octet-stream
+          
+      - name: Upload Release Board Render Top
+        id: upload-release-render-top 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./PCB-Top.jpg
+          asset_name: PCB-Top.jpg
+          asset_content_type: image/jpeg
+          
+      - name: Upload Release Board Render Bottom
+        id: upload-release-render-bottom 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./PCB-Bottom.jpg
+          asset_name: PCB-Bottom.jpg
+          asset_content_type: image/jpeg
