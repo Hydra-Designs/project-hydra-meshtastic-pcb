@@ -60,3 +60,11 @@ outputs:
         hide_pcb_info: true
         hide_stats_info: true
         quote_all: true
+
+  - name: 'interactive_bom'
+    comment: "Interactive Bill of Materials (HTML)"
+    type: ibom
+    dir: BoM
+    options:
+      blacklist: 'DNF*'
+      name_format: '%f_%r_iBoM'
