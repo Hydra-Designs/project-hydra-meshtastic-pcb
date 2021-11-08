@@ -20,8 +20,6 @@ jobs:
         dir: Gerber
         schema: '*.sch'
         board: '*.kicad_pcb'
-    - name: Sleep 5 seconds
-      run: sleep 5 
     - name: Show artifacts # For diagnostics
       run: ls -lR 
     - name: Upload artifacts
@@ -40,8 +38,6 @@ jobs:
         dir: BOM
         schema: '*.sch'
         board: '*.kicad_pcb'
-    - name: Sleep 5 seconds
-      run: sleep 5 
     - name: Show artifacts # For diagnostics
       run: ls -lR
     - name: Upload artifacts
@@ -60,8 +56,6 @@ jobs:
         dir: Render
         schema: '*.sch'
         board: '*.kicad_pcb'
-    - name: Sleep 5 seconds
-      run: sleep 5 
     - name: Show artifacts # For diagnostics
       run: ls -lR 
     - name: Upload artifacts
