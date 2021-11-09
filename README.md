@@ -12,6 +12,7 @@ A minimalist PCB design built around the Ebyte E22-900M30S 30dbm (1 watt) LoRA r
 - Supports up to 30dbm (1 watt) transmit power
 - OLED support via I2C
 - GPS support via UART
+- PSRAM support
 - User button via pin header
 - Switchable 3.3V power rail (GPS power saving)
 - ADC input for battery voltage sensing
