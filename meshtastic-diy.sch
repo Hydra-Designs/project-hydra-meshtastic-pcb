@@ -5,8 +5,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Meshtastic DIY 1W board"
-Date "2021-11-07"
-Rev "0.1"
+Date "2021-11-12"
+Rev "2.0"
 Comp ""
 Comment1 ""
 Comment2 ""
@@ -302,70 +302,10 @@ F 3 "~" H 5850 1200 50  0001 C CNN
 $EndComp
 Text Label 5850 1050 1    50   ~ 0
 GPIO2
-Text Label 1250 1450 0    50   ~ 0
-DTR
-Text Label 1250 1350 0    50   ~ 0
-RTS
-$Comp
-L Device:R R1
-U 1 1 6174DE67
-P 1650 1550
-F 0 "R1" V 1443 1550 50  0000 C CNN
-F 1 "2.7k" V 1534 1550 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 1580 1550 50  0001 C CNN
-F 3 "~" H 1650 1550 50  0001 C CNN
-	1    1650 1550
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:R R2
-U 1 1 6174EBE8
-P 1650 1650
-F 0 "R2" V 1850 1650 50  0000 C CNN
-F 1 "2.7k" V 1750 1650 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 1580 1650 50  0001 C CNN
-F 3 "~" H 1650 1650 50  0001 C CNN
-	1    1650 1650
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	1250 1550 1500 1550
-Wire Wire Line
-	1250 1650 1500 1650
-$Comp
-L Connector:Conn_01x06_Female J1
-U 1 1 61750196
-P 1050 1450
-F 0 "J1" H 1050 1750 50  0000 C CNN
-F 1 "programming header" H 700 850 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 1050 1450 50  0001 C CNN
-F 3 "~" H 1050 1450 50  0001 C CNN
-	1    1050 1450
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR02
-U 1 1 617530A5
-P 1350 1750
-F 0 "#PWR02" H 1350 1500 50  0001 C CNN
-F 1 "GND" H 1355 1577 50  0000 C CNN
-F 2 "" H 1350 1750 50  0001 C CNN
-F 3 "" H 1350 1750 50  0001 C CNN
-	1    1350 1750
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1350 1250 1250 1250
-Wire Wire Line
-	1250 1750 1350 1750
 Text Label 3100 3050 0    50   ~ 0
 ESP32_TX
 Text Label 3100 3250 0    50   ~ 0
 ESP32_RX
-Text Label 1800 1550 0    50   ~ 0
-ESP32_RX
-Text Label 1800 1650 0    50   ~ 0
-ESP32_TX
 $Comp
 L Device:R R9
 U 1 1 6175CAB5
@@ -934,17 +874,6 @@ F 3 "" H 9500 1250 50  0001 C CNN
 	1    9500 1250
 	1    0    0    -1  
 $EndComp
-$Comp
-L power:+5V #PWR0102
-U 1 1 61863032
-P 1350 1250
-F 0 "#PWR0102" H 1350 1100 50  0001 C CNN
-F 1 "+5V" H 1365 1423 50  0000 C CNN
-F 2 "" H 1350 1250 50  0001 C CNN
-F 3 "" H 1350 1250 50  0001 C CNN
-	1    1350 1250
-	1    0    0    -1  
-$EndComp
 Text Label 1900 3250 2    50   ~ 0
 USR_BTN
 Text Label 9500 1450 2    50   ~ 0
@@ -1173,4 +1102,79 @@ Wire Wire Line
 	3100 4750 3800 4750
 Wire Wire Line
 	3100 5250 3800 5250
+$Comp
+L Connector:Conn_01x08_Female J1
+U 1 1 61750196
+P 1100 1550
+F 0 "J1" H 1100 1950 50  0000 C CNN
+F 1 "programming header" H 750 950 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 1100 1550 50  0001 C CNN
+F 3 "~" H 1100 1550 50  0001 C CNN
+	1    1100 1550
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	1300 1250 1650 1250
+Wire Wire Line
+	1650 1350 1300 1350
+Wire Wire Line
+	1300 1550 1600 1550
+Wire Wire Line
+	1600 1650 1300 1650
+Text Label 1300 1850 0    50   ~ 0
+EN
+Text Label 1300 1950 0    50   ~ 0
+GPIO0
+$Comp
+L power:+5V #PWR0102
+U 1 1 61863032
+P 1300 1450
+F 0 "#PWR0102" H 1300 1300 50  0001 C CNN
+F 1 "+5V" H 1315 1623 50  0000 C CNN
+F 2 "" H 1300 1450 50  0001 C CNN
+F 3 "" H 1300 1450 50  0001 C CNN
+	1    1300 1450
+	0    1    -1   0   
+$EndComp
+Text Label 1900 1650 0    50   ~ 0
+ESP32_TX
+Text Label 1900 1550 0    50   ~ 0
+ESP32_RX
+$Comp
+L power:GND #PWR02
+U 1 1 617530A5
+P 1300 1750
+F 0 "#PWR02" H 1300 1500 50  0001 C CNN
+F 1 "GND" H 1305 1577 50  0000 C CNN
+F 2 "" H 1300 1750 50  0001 C CNN
+F 3 "" H 1300 1750 50  0001 C CNN
+	1    1300 1750
+	0    -1   1    0   
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 6174EBE8
+P 1750 1650
+F 0 "R2" V 1650 1600 50  0000 C CNN
+F 1 "2.7k" V 1750 1650 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1680 1650 50  0001 C CNN
+F 3 "~" H 1750 1650 50  0001 C CNN
+	1    1750 1650
+	0    1    -1   0   
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 6174DE67
+P 1750 1550
+F 0 "R1" V 1650 1500 50  0000 C CNN
+F 1 "2.7k" V 1750 1550 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1680 1550 50  0001 C CNN
+F 3 "~" H 1750 1550 50  0001 C CNN
+	1    1750 1550
+	0    1    1    0   
+$EndComp
+Text Label 1650 1350 0    50   ~ 0
+RTS
+Text Label 1650 1250 0    50   ~ 0
+DTR
 $EndSCHEMATC
