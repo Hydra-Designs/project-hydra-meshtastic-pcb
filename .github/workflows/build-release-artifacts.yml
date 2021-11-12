@@ -118,7 +118,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./meshtastic-diy_bom_jlc.csv
-          asset_name: BoM-JLCPCB.csv
+          asset_name: BoM-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
           
       - name: Upload Release CPL
@@ -129,7 +129,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./meshtastic-diy_cpl_jlc.csv
-          asset_name: CPL-JLCPCB.csv
+          asset_name: CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
           
       - name: Upload Release iBoM
@@ -140,7 +140,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./BoM/meshtastic-diy-ibom.html
-          asset_name: Interactive-BoM.html
+          asset_name: Interactive-BoM.${{ env.RELEASE_VERSION }}.html
           asset_content_type: text/html
           
       - name: Upload Release Gerber
@@ -151,7 +151,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./JLCPCB/meshtastic-diy-JLCPCB.zip
-          asset_name: Gerber-JLCPCB.zip
+          asset_name: Gerber-JLCPCB.${{ env.RELEASE_VERSION }}.zip
           asset_content_type: application/zip
           
       - name: Upload Release Schematic
@@ -162,7 +162,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./Schematic.pdf
-          asset_name: Schematic.pdf
+          asset_name: Schematic.${{ env.RELEASE_VERSION }}.pdf
           asset_content_type: application/pdf
           
       - name: Upload Release STP
@@ -173,7 +173,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./PCB-Model.stp
-          asset_name: PCB-Model.stp
+          asset_name: PCB-Model.${{ env.RELEASE_VERSION }}.stp
           asset_content_type: application/octet-stream
           
       - name: Upload Release Board Render Top
@@ -184,7 +184,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./PCB-Top.jpg
-          asset_name: PCB-Top.jpg
+          asset_name: PCB-Top.${{ env.RELEASE_VERSION }}.jpg
           asset_content_type: image/jpeg
           
       - name: Upload Release Board Render Bottom
@@ -195,5 +195,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./PCB-Bottom.jpg
-          asset_name: PCB-Bottom.jpg
+          asset_name: PCB-Bottom.${{ env.RELEASE_VERSION }}.jpg
           asset_content_type: image/jpeg
