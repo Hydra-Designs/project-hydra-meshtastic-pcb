@@ -85,17 +85,10 @@ jobs:
         with:
           path: './version.properties'
           property: 'MINOR'
-      
-      - name: Set Revision Version
-        id: revision_version
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: './version.properties'
-          property: 'REVISION'
           
       - name: Set Release Version
         id: set_release_version
-        run: echo ::set-env name=RELEASE_VERSION::${{ steps.major_version.outputs.value }}.${{ steps.minor_version.outputs.value }}.${{ steps.revision_version.outputs.value }}
+        run: echo ::set-env name=RELEASE_VERSION::${{ steps.major_version.outputs.value }}.${{ steps.minor_version.outputs.value }}
          
       - name: Download Gerber
         id: download_gerber
