@@ -35,8 +35,9 @@ A minimalist PCB design built around the Ebyte E22-900M30S 30dbm (1 watt) LoRA r
 - Start with the 3.3v step down regulator and test the 3.3v rail first.
 - Assemble all the parts for the auto reset circuit and the ESP32 module. Don't forget to connect the 2.4G antenna!
 - Try to program the core pcb next.
-- Lastly, populate the RF modem. You can use a strip of cardboard as a spacer to leave a small gap between the two PCBs, in case the ESP32 releases it's magic smoke you can use solder wick to easily remove and reuse the RF modem.
+- Lastly, populate the RF modem. You can use a strip of cardboard as a spacer to leave a small gap between the two PCBs, in case the ESP32 stops working you can use solder wick to easily remove and reuse the RF modem.
 - Never ever turn on the core pcb withount an antenna! This may infuriate the RF gods and you inevitably end up performing a sacrifial ritual to please the RF gods with magic smoke.
+- PSRAM is optional
 
 ## Contributing
 
