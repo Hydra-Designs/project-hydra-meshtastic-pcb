@@ -13,7 +13,7 @@ filters:
     type: generic
     exclude_any:
       - column: Package
-        regex: '^e22.+'
+        regex: 'e22*'
 
 variants:
   - name: rotated
