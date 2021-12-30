@@ -6,7 +6,8 @@ on:
     - '*.properties'
     - '*.yaml'
     - '*.yml'
-
+  workflow_dispatch:
+  
 jobs:
           
   Build-Gerber:
