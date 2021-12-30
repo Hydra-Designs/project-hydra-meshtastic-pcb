@@ -1202,4 +1202,37 @@ Wire Wire Line
 Connection ~ 7300 2800
 Connection ~ 7700 2800
 Connection ~ 6900 2800
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 61CEC8BE
+P 750 6500
+F 0 "H1" H 850 6546 50  0000 L CNN
+F 1 "tooling_hole" H 850 6455 50  0000 L CNN
+F 2 "meshtastic-diy 1W:jlc_toolinghole" H 750 6500 50  0001 C CNN
+F 3 "~" H 750 6500 50  0001 C CNN
+	1    750  6500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 61CED187
+P 750 6700
+F 0 "H2" H 850 6746 50  0000 L CNN
+F 1 "tooling_hole" H 850 6655 50  0000 L CNN
+F 2 "meshtastic-diy 1W:jlc_toolinghole" H 750 6700 50  0001 C CNN
+F 3 "~" H 750 6700 50  0001 C CNN
+	1    750  6700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 61CED430
+P 750 6900
+F 0 "H3" H 850 6946 50  0000 L CNN
+F 1 "tooling_hole" H 850 6855 50  0000 L CNN
+F 2 "meshtastic-diy 1W:jlc_toolinghole" H 750 6900 50  0001 C CNN
+F 3 "~" H 750 6900 50  0001 C CNN
+	1    750  6900
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
