@@ -8,12 +8,12 @@ filters:
     include_only:
       - column: 'LCSC#'
         regex: '^C\d+'
- - name: exclude_e22
-   comment: 'Exclude E22 from CPL'
-   type: generic
-   exclude_any:
-     - column: Package
-       regex: '^e22.+'
+  - name: exclude_e22
+    comment: 'Exclude E22 from CPL'
+    type: generic
+    exclude_any:
+      - column: Package
+        regex: '^e22.+'
 
 variants:
   - name: rotated
