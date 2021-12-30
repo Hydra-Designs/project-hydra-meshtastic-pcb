@@ -11,9 +11,8 @@ filters:
   - name: exclude_e22
     comment: 'Exclude E22 from CPL'
     type: generic
-    exclude_any:
-      - column: Package
-        regex: 'e22*'
+    exclude_refs:
+      - U3
 
 variants:
   - name: rotated
