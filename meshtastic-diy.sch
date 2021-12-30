@@ -575,13 +575,13 @@ $Comp
 L Device:L L2
 U 1 1 617D14E6
 P 6750 2800
-F 0 "L2" V 6940 2800 50  0000 C CNN
-F 1 "4.7uH" V 6849 2800 50  0000 C CNN
+F 0 "L2" V 6550 2800 50  0000 C CNN
+F 1 "4.7uH" V 6650 2800 50  0000 C CNN
 F 2 "meshtastic-diy 1W:chilsin_BMRA00040412" H 6750 2800 50  0001 C CNN
 F 3 "~" H 6750 2800 50  0001 C CNN
 F 4 "C882052" V 6750 2800 50  0001 C CNN "LCSC#"
 	1    6750 2800
-	0    -1   -1   0   
+	0    1    1    0   
 $EndComp
 $Comp
 L custom_parts:PAM2312 U5
@@ -645,7 +645,6 @@ F 4 "C86295 " H 7700 2950 50  0001 C CNN "LCSC#"
 $EndComp
 Wire Wire Line
 	6900 2800 7300 2800
-Connection ~ 6900 2800
 Wire Wire Line
 	6600 3000 6700 3000
 Wire Wire Line
@@ -1201,4 +1200,5 @@ Wire Wire Line
 	7300 2800 7700 2800
 Connection ~ 7300 2800
 Connection ~ 7700 2800
+Connection ~ 6900 2800
 $EndSCHEMATC
