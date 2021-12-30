@@ -8,6 +8,11 @@ filters:
     include_only:
       - column: 'LCSC#'
         regex: '^C\d+'
+ - name: exclude_e22
+   type: 'generic'
+   exclude_any:
+     - column: Package
+       regex: '^e22.+'
 
 variants:
   - name: rotated
@@ -25,8 +30,9 @@ outputs:
       output: '%f_cpl_jlc.%x'
       format: CSV
       units: millimeters
-      separate_files_for_front_and_back: true
+      separate_files_for_front_and_back: false
       only_smd: false
+      exclude_filter: 'exclude_e22'
       columns:
         - id: Ref
           name: Designator
