@@ -32,7 +32,7 @@ outputs:
       units: millimeters
       separate_files_for_front_and_back: false
       only_smd: false
-      exclude_filter: 'exclude_e22'
+      dnf_filter: 'exclude_e22'
       columns:
         - id: Ref
           name: Designator
