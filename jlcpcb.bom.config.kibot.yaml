@@ -13,7 +13,12 @@ filters:
     type: generic
     exclude_refs:
       - U3
-
+  - name: exclude_esp32
+    comment: 'Exclude ESP32 from CPL'
+    type: generic
+    exclude_refs:
+      - U1
+      
 variants:
   - name: rotated
     comment: 'Just a place holder for the rotation filter'
