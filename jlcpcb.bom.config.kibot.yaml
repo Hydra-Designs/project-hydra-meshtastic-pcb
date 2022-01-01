@@ -18,12 +18,16 @@ filters:
     comment: 'Exclude auto programming circuit from CPL'
     type: generic
     exclude_refs:
-      - U3
-      - U1
       - R3
       - R4
       - Q1
       - Q2
+  - name: exclude_psram
+    comment: 'Exclude psram circuit from CPL'
+    type: generic
+    exclude_refs:
+      - R6
+      - U2
       
 variants:
   - name: rotated
@@ -68,7 +72,36 @@ outputs:
       units: millimeters
       separate_files_for_front_and_back: false
       only_smd: true
-      dnf_filter: 'exclude_auto_prog'
+      dnf_filter: 
+        - 'exclude_e22_and_esp32'
+        - 'exclude_auto_prog'
+      columns:
+        - id: Ref
+          name: Designator
+        - Val
+        - Package
+        - id: PosX
+          name: "Mid X"
+        - id: PosY
+          name: "Mid Y"
+        - id: Rot
+          name: Rotation
+        - id: Side
+          name: Layer
+          
+  - name: 'position (no psram)'
+    comment: "Pick and place file, JLC style (no psram)"
+    type: position
+    options:
+      variant: rotated
+      output: '%f_cpl_jlc_no_psram.%x'
+      format: CSV
+      units: millimeters
+      separate_files_for_front_and_back: false
+      only_smd: true
+      dnf_filter: 
+        - 'exclude_e22_and_esp32'
+        - 'exclude_psram'
       columns:
         - id: Ref
           name: Designator
@@ -83,6 +116,35 @@ outputs:
         - id: Side
           name: Layer
 
+          
+  - name: 'position (min parts)'
+    comment: "Pick and place file, JLC style (minimum parts)"
+    type: position
+    options:
+      variant: rotated
+      output: '%f_cpl_jlc_min_parts.%x'
+      format: CSV
+      units: millimeters
+      separate_files_for_front_and_back: false
+      only_smd: true
+      dnf_filter: 
+        - 'exclude_e22_and_esp32'
+        - 'exclude_psram'
+        - 'exclude_auto_prog'
+      columns:
+        - id: Ref
+          name: Designator
+        - Val
+        - Package
+        - id: PosX
+          name: "Mid X"
+        - id: PosY
+          name: "Mid Y"
+        - id: Rot
+          name: Rotation
+        - id: Side
+          name: Layer
+          
   - name: 'bom'
     comment: "BoM for JLC"
     type: bom
