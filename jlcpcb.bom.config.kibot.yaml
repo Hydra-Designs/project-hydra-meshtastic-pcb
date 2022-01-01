@@ -63,7 +63,7 @@ outputs:
     type: position
     options:
       variant: rotated
-      output: '%f_cpl_jlc.%x'
+      output: '%f_cpl_jlc_no_auto_prog.%x'
       format: CSV
       units: millimeters
       separate_files_for_front_and_back: false
