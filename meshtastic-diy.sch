@@ -22,7 +22,7 @@ F 1 "ESP32-WROOM-32U" H 2750 2950 50  0000 C CNN
 F 2 "RF_Module:ESP32-WROOM-32U" H 2200 2800 50  0001 C CNN
 F 3 "https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32d_esp32-wroom-32u_datasheet_en.pdf" H 1900 4350 50  0001 C CNN
 F 4 "C328062" H 2200 4300 50  0001 C CNN "LCSC#"
-F 5 "all" H 2200 4300 50  0001 C CNN "Config"
+F 5 "" H 2200 4300 50  0001 C CNN "Config"
 	1    2200 4300
 	1    0    0    -1  
 $EndComp
@@ -35,7 +35,7 @@ F 1 "ESP-PSRAM64" H 5550 4900 50  0000 R CNN
 F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 5750 4750 50  0001 C CNN
 F 3 "" H 5350 5850 50  0001 C CNN
 F 4 "C261881" H 5750 5350 50  0001 C CNN "LCSC#"
-F 5 "all,psram" H 5750 5350 50  0001 C CNN "Config"
+F 5 "-core,-autoprog" H 5750 5350 50  0001 C CNN "Config"
 	1    5750 5350
 	-1   0    0    -1  
 $EndComp
@@ -48,7 +48,7 @@ F 1 "10k" H 5180 4795 50  0000 R CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 5180 4750 50  0001 C CNN
 F 3 "~" H 5250 4750 50  0001 C CNN
 F 4 "C98220" H 5250 4750 50  0001 C CNN "LCSC#"
-F 5 "all,psram" H 5250 4750 50  0001 C CNN "Config"
+F 5 "-core,-autoprog" H 5250 4750 50  0001 C CNN "Config"
 	1    5250 4750
 	-1   0    0    1   
 $EndComp
@@ -181,7 +181,7 @@ F 1 "BC848" H 3741 1205 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 3750 1175 50  0001 L CIN
 F 3 "http://www.infineon.com/dgdl/Infineon-BC847SERIES_BC848SERIES_BC849SERIES_BC850SERIES-DS-v01_01-en.pdf?fileId=db3a304314dca389011541d4630a1657" H 3550 1250 50  0001 L CNN
 F 4 "C8577" H 3550 1250 50  0001 C CNN "LCSC#"
-F 5 "all,autoprog" H 3550 1250 50  0001 C CNN "Config"
+F 5 "-core,-psram" H 3550 1250 50  0001 C CNN "Config"
 	1    3550 1250
 	1    0    0    -1  
 $EndComp
@@ -194,7 +194,7 @@ F 1 "BC848" H 3741 1895 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 3750 1775 50  0001 L CIN
 F 3 "http://www.infineon.com/dgdl/Infineon-BC847SERIES_BC848SERIES_BC849SERIES_BC850SERIES-DS-v01_01-en.pdf?fileId=db3a304314dca389011541d4630a1657" H 3550 1850 50  0001 L CNN
 F 4 "C8577" H 3550 1850 50  0001 C CNN "LCSC#"
-F 5 "all,autoprog" H 3550 1850 50  0001 C CNN "Config"
+F 5 "-core,-psram" H 3550 1850 50  0001 C CNN "Config"
 	1    3550 1850
 	1    0    0    1   
 $EndComp
@@ -207,7 +207,7 @@ F 1 "10k" V 3316 1250 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 3130 1250 50  0001 C CNN
 F 3 "~" H 3200 1250 50  0001 C CNN
 F 4 "C98220" V 3200 1250 50  0001 C CNN "LCSC#"
-F 5 "all,autoprog" H 3200 1250 50  0001 C CNN "Config"
+F 5 "-core,-psram" H 3200 1250 50  0001 C CNN "Config"
 	1    3200 1250
 	0    -1   -1   0   
 $EndComp
@@ -220,7 +220,7 @@ F 1 "10k" V 3316 1850 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 3130 1850 50  0001 C CNN
 F 3 "~" H 3200 1850 50  0001 C CNN
 F 4 "C98220" V 3200 1850 50  0001 C CNN "LCSC#"
-F 5 "all,autoprog" H 3200 1850 50  0001 C CNN "Config"
+F 5 "-core,-psram" H 3200 1850 50  0001 C CNN "Config"
 	1    3200 1850
 	0    -1   -1   0   
 $EndComp
@@ -265,7 +265,7 @@ F 1 "10k" H 4480 1205 50  0000 R CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 4480 1250 50  0001 C CNN
 F 3 "~" H 4550 1250 50  0001 C CNN
 F 4 "C98220" H 4550 1250 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 4550 1250 50  0001 C CNN "Config"
+F 5 "" H 4550 1250 50  0001 C CNN "Config"
 	1    4550 1250
 	-1   0    0    -1  
 $EndComp
@@ -278,7 +278,7 @@ F 1 "100n" H 4665 1605 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 4588 1500 50  0001 C CNN
 F 3 "~" H 4550 1650 50  0001 C CNN
 F 4 "C519438" H 4550 1650 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 4550 1650 50  0001 C CNN "Config"
+F 5 "" H 4550 1650 50  0001 C CNN "Config"
 	1    4550 1650
 	1    0    0    -1  
 $EndComp
@@ -304,7 +304,7 @@ F 1 "2.7k" H 5920 1455 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 5780 1500 50  0001 C CNN
 F 3 "~" H 5850 1500 50  0001 C CNN
 F 4 "C114612" H 5850 1500 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 5850 1500 50  0001 C CNN "Config"
+F 5 "" H 5850 1500 50  0001 C CNN "Config"
 	1    5850 1500
 	1    0    0    -1  
 $EndComp
@@ -317,7 +317,7 @@ F 1 "LED" V 5798 1082 50  0000 R CNN
 F 2 "LED_SMD:LED_0603_1608Metric" H 5850 1200 50  0001 C CNN
 F 3 "~" H 5850 1200 50  0001 C CNN
 F 4 "C434421" V 5850 1200 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 5850 1200 50  0001 C CNN "Config"
+F 5 "" H 5850 1200 50  0001 C CNN "Config"
 	1    5850 1200
 	0    -1   -1   0   
 $EndComp
@@ -336,7 +336,7 @@ F 1 "10k" H 6480 1205 50  0000 R CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 6480 1250 50  0001 C CNN
 F 3 "~" H 6550 1250 50  0001 C CNN
 F 4 "C98220" H 6550 1250 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 6550 1250 50  0001 C CNN "Config"
+F 5 "" H 6550 1250 50  0001 C CNN "Config"
 	1    6550 1250
 	-1   0    0    1   
 $EndComp
@@ -376,7 +376,7 @@ F 1 "ipex antenna" H 9650 4884 50  0000 L CNN
 F 2 "meshtastic-diy 1W:U.FL_Molex_MCRF_73412-0110_horizontal" H 9550 5000 50  0001 C CNN
 F 3 " ~" H 9550 5000 50  0001 C CNN
 F 4 "C411563" H 9550 5000 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 9550 5000 50  0001 C CNN "Config"
+F 5 "" H 9550 5000 50  0001 C CNN "Config"
 	1    9550 5000
 	1    0    0    -1  
 $EndComp
@@ -417,7 +417,7 @@ F 1 "10k" H 3580 945 50  0000 R CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 3580 900 50  0001 C CNN
 F 3 "~" H 3650 900 50  0001 C CNN
 F 4 "C98220" H 3650 900 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 3650 900 50  0001 C CNN "Config"
+F 5 "" H 3650 900 50  0001 C CNN "Config"
 	1    3650 900 
 	-1   0    0    1   
 $EndComp
@@ -432,7 +432,7 @@ F 1 "E22-900M30S" H 8300 4800 50  0000 L CNN
 F 2 "meshtastic-diy 1W:e22-900m30s-handsoldering" H 8200 6600 50  0001 C CNN
 F 3 "https://www.ebyte.com/en/downpdf.aspx?id=453" H 8200 6600 50  0001 C CNN
 F 4 "C411294" H 8200 5400 50  0001 C CNN "LCSC#"
-F 5 "all" H 8200 5400 50  0001 C CNN "Config"
+F 5 "" H 8200 5400 50  0001 C CNN "Config"
 	1    8200 5400
 	1    0    0    -1  
 $EndComp
@@ -445,7 +445,7 @@ F 1 "100n" H 3765 3355 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 3688 3250 50  0001 C CNN
 F 3 "~" H 3650 3400 50  0001 C CNN
 F 4 "C519438" H 3650 3400 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 3650 3400 50  0001 C CNN "Config"
+F 5 "" H 3650 3400 50  0001 C CNN "Config"
 	1    3650 3400
 	1    0    0    -1  
 $EndComp
@@ -513,7 +513,7 @@ F 1 "100n" H 6515 5255 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 6438 5150 50  0001 C CNN
 F 3 "~" H 6400 5300 50  0001 C CNN
 F 4 "C519438" H 6400 5300 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 6400 5300 50  0001 C CNN "Config"
+F 5 "" H 6400 5300 50  0001 C CNN "Config"
 	1    6400 5300
 	1    0    0    -1  
 $EndComp
@@ -548,7 +548,7 @@ F 1 "100n" H 8815 5405 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 8738 5300 50  0001 C CNN
 F 3 "~" H 8700 5450 50  0001 C CNN
 F 4 "C519438" H 8700 5450 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 8700 5450 50  0001 C CNN "Config"
+F 5 "" H 8700 5450 50  0001 C CNN "Config"
 	1    8700 5450
 	1    0    0    -1  
 $EndComp
@@ -598,7 +598,7 @@ F 1 "4.7uH" V 6850 2800 50  0000 C CNN
 F 2 "meshtastic-diy 1W:chilsin_BMRA00040412" H 6750 2800 50  0001 C CNN
 F 3 "~" H 6750 2800 50  0001 C CNN
 F 4 "C136097" V 6750 2800 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 6750 2800 50  0001 C CNN "Config"
+F 5 "" H 6750 2800 50  0001 C CNN "Config"
 	1    6750 2800
 	0    -1   -1   0   
 $EndComp
@@ -611,7 +611,7 @@ F 1 "PAM2312" H 6550 2950 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23-5" H 6300 3150 50  0001 C CNN
 F 3 "" H 6300 3150 100 0001 C CNN
 F 4 " C157537" H 6300 3150 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 6300 3150 50  0001 C CNN "Config"
+F 5 "" H 6300 3150 50  0001 C CNN "Config"
 	1    6300 3150
 	1    0    0    -1  
 $EndComp
@@ -624,7 +624,7 @@ F 1 "536k" H 6970 2905 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 6830 2950 50  0001 C CNN
 F 3 "~" H 6900 2950 50  0001 C CNN
 F 4 "C227955" H 6900 2950 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 6900 2950 50  0001 C CNN "Config"
+F 5 "" H 6900 2950 50  0001 C CNN "Config"
 	1    6900 2950
 	1    0    0    -1  
 $EndComp
@@ -637,7 +637,7 @@ F 1 "118k" H 6970 3205 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 6830 3250 50  0001 C CNN
 F 3 "~" H 6900 3250 50  0001 C CNN
 F 4 "C137804" H 6900 3250 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 6900 3250 50  0001 C CNN "Config"
+F 5 "" H 6900 3250 50  0001 C CNN "Config"
 	1    6900 3250
 	1    0    0    -1  
 $EndComp
@@ -650,7 +650,7 @@ F 1 "22uF" H 7415 2905 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 7338 2800 50  0001 C CNN
 F 3 "~" H 7300 2950 50  0001 C CNN
 F 4 "C86295 " H 7300 2950 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 7300 2950 50  0001 C CNN "Config"
+F 5 "" H 7300 2950 50  0001 C CNN "Config"
 	1    7300 2950
 	1    0    0    -1  
 $EndComp
@@ -663,7 +663,7 @@ F 1 "22uF" H 7815 2905 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 7738 2800 50  0001 C CNN
 F 3 "~" H 7700 2950 50  0001 C CNN
 F 4 "C86295 " H 7700 2950 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 7700 2950 50  0001 C CNN "Config"
+F 5 "" H 7700 2950 50  0001 C CNN "Config"
 	1    7700 2950
 	1    0    0    -1  
 $EndComp
@@ -696,7 +696,7 @@ F 1 "22uF" H 5465 2905 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 5388 2800 50  0001 C CNN
 F 3 "~" H 5350 2950 50  0001 C CNN
 F 4 "C86295 " H 5350 2950 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 5350 2950 50  0001 C CNN "Config"
+F 5 "" H 5350 2950 50  0001 C CNN "Config"
 	1    5350 2950
 	1    0    0    -1  
 $EndComp
@@ -795,7 +795,7 @@ F 0 "NT1" H 5600 3631 50  0000 C CNN
 F 1 "Net-Tie_2" H 5600 3540 50  0000 C CNN
 F 2 "NetTie:NetTie-2_SMD_Pad0.5mm" H 5600 3450 50  0001 C CNN
 F 3 "~" H 5600 3450 50  0001 C CNN
-F 4 "all,core,autoprog,psram" H 5600 3450 50  0001 C CNN "Config"
+F 4 "" H 5600 3450 50  0001 C CNN "Config"
 	1    5600 3450
 	1    0    0    -1  
 $EndComp
@@ -819,7 +819,7 @@ F 1 "22uF" H 9215 5405 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 9138 5300 50  0001 C CNN
 F 3 "~" H 9100 5450 50  0001 C CNN
 F 4 "C86295 " H 9100 5450 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 9100 5450 50  0001 C CNN "Config"
+F 5 "" H 9100 5450 50  0001 C CNN "Config"
 	1    9100 5450
 	1    0    0    -1  
 $EndComp
@@ -876,7 +876,7 @@ F 1 "22uF" H 4265 3355 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 4188 3250 50  0001 C CNN
 F 3 "~" H 4150 3400 50  0001 C CNN
 F 4 "C86295" H 4150 3400 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 4150 3400 50  0001 C CNN "Config"
+F 5 "" H 4150 3400 50  0001 C CNN "Config"
 	1    4150 3400
 	1    0    0    -1  
 $EndComp
@@ -991,7 +991,7 @@ F 1 "CJ2301" H 8755 1545 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 8750 1600 50  0001 C CNN
 F 3 "~" H 8550 1500 50  0001 C CNN
 F 4 "C8547" H 8550 1500 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 8550 1500 50  0001 C CNN "Config"
+F 5 "" H 8550 1500 50  0001 C CNN "Config"
 	1    8550 1500
 	1    0    0    1   
 $EndComp
@@ -1004,7 +1004,7 @@ F 1 "10k" H 8430 1245 50  0000 R CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 8430 1200 50  0001 C CNN
 F 3 "~" H 8500 1200 50  0001 C CNN
 F 4 "C98220" H 8500 1200 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 8500 1200 50  0001 C CNN "Config"
+F 5 "" H 8500 1200 50  0001 C CNN "Config"
 	1    8500 1200
 	0    -1   1    0   
 $EndComp
@@ -1021,7 +1021,7 @@ F 1 "100" H 8130 1545 50  0000 R CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 8130 1500 50  0001 C CNN
 F 3 "~" H 8200 1500 50  0001 C CNN
 F 4 "C105588" H 8200 1500 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 8200 1500 50  0001 C CNN "Config"
+F 5 "" H 8200 1500 50  0001 C CNN "Config"
 	1    8200 1500
 	0    1    1    0   
 $EndComp
@@ -1050,7 +1050,7 @@ F 0 "J2" H 9728 1776 50  0000 L CNN
 F 1 "oled/gps/external HW" H 9728 1685 50  0000 L CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x11_P2.54mm_Vertical" H 9700 1750 50  0001 C CNN
 F 3 "~" H 9700 1750 50  0001 C CNN
-F 4 "all,core,autoprog,psram" H 9700 1750 50  0001 C CNN "Config"
+F 4 "" H 9700 1750 50  0001 C CNN "Config"
 	1    9700 1750
 	1    0    0    -1  
 $EndComp
@@ -1107,7 +1107,7 @@ F 0 "TP1" H 3558 5018 50  0000 L CNN
 F 1 "TestPoint" H 3558 4927 50  0000 L CNN
 F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 3700 4900 50  0001 C CNN
 F 3 "~" H 3700 4900 50  0001 C CNN
-F 4 "all,core,autoprog,psram" H 3500 4900 50  0001 C CNN "Config"
+F 4 "" H 3500 4900 50  0001 C CNN "Config"
 	1    3500 4900
 	1    0    0    -1  
 $EndComp
@@ -1124,7 +1124,7 @@ F 1 "100n" H 3615 5605 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 3538 5500 50  0001 C CNN
 F 3 "~" H 3500 5650 50  0001 C CNN
 F 4 "C519438" H 3500 5650 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 3500 5650 50  0001 C CNN "Config"
+F 5 "" H 3500 5650 50  0001 C CNN "Config"
 	1    3500 5650
 	1    0    0    -1  
 $EndComp
@@ -1151,7 +1151,7 @@ F 0 "J1" H 1300 1900 50  0000 C CNN
 F 1 "programming header" H 950 900 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 1300 1500 50  0001 C CNN
 F 3 "~" H 1300 1500 50  0001 C CNN
-F 4 "all,core,autoprog,psram" H 1300 1500 50  0001 C CNN "Config"
+F 4 "" H 1300 1500 50  0001 C CNN "Config"
 	1    1300 1500
 	-1   0    0    -1  
 $EndComp
@@ -1202,7 +1202,7 @@ F 1 "2.7k" V 1950 1600 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 1880 1600 50  0001 C CNN
 F 3 "~" H 1950 1600 50  0001 C CNN
 F 4 "C114612" V 1950 1600 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 1950 1600 50  0001 C CNN "Config"
+F 5 "" H 1950 1600 50  0001 C CNN "Config"
 	1    1950 1600
 	0    1    -1   0   
 $EndComp
@@ -1215,7 +1215,7 @@ F 1 "2.7k" V 1950 1500 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 1880 1500 50  0001 C CNN
 F 3 "~" H 1950 1500 50  0001 C CNN
 F 4 "C114612" V 1950 1500 50  0001 C CNN "LCSC#"
-F 5 "all,core,autoprog,psram" H 1950 1500 50  0001 C CNN "Config"
+F 5 "" H 1950 1500 50  0001 C CNN "Config"
 	1    1950 1500
 	0    1    1    0   
 $EndComp
@@ -1231,7 +1231,7 @@ F 0 "SYM1" H 2730 7559 50  0000 L CNN
 F 1 "Meshtastic Logo" H 2730 7468 50  0000 L CNN
 F 2 "meshtastic-diy 1W:meshtastic_logo" H 2600 7325 50  0001 C CNN
 F 3 "~" H 2630 7300 50  0001 C CNN
-F 4 "all,core,autoprog,psram" H 2600 7500 50  0001 C CNN "Config"
+F 4 "" H 2600 7500 50  0001 C CNN "Config"
 	1    2600 7500
 	1    0    0    -1  
 $EndComp
@@ -1248,7 +1248,7 @@ F 0 "H1" H 850 6546 50  0000 L CNN
 F 1 "tooling_hole" H 850 6455 50  0000 L CNN
 F 2 "meshtastic-diy 1W:jlc_toolinghole" H 750 6500 50  0001 C CNN
 F 3 "~" H 750 6500 50  0001 C CNN
-F 4 "all,core,autoprog,psram" H 750 6500 50  0001 C CNN "Config"
+F 4 "" H 750 6500 50  0001 C CNN "Config"
 	1    750  6500
 	1    0    0    -1  
 $EndComp
@@ -1260,7 +1260,7 @@ F 0 "H2" H 850 6746 50  0000 L CNN
 F 1 "tooling_hole" H 850 6655 50  0000 L CNN
 F 2 "meshtastic-diy 1W:jlc_toolinghole" H 750 6700 50  0001 C CNN
 F 3 "~" H 750 6700 50  0001 C CNN
-F 4 "all,core,autoprog,psram" H 750 6700 50  0001 C CNN "Config"
+F 4 "" H 750 6700 50  0001 C CNN "Config"
 	1    750  6700
 	1    0    0    -1  
 $EndComp
@@ -1272,7 +1272,7 @@ F 0 "H3" H 850 6946 50  0000 L CNN
 F 1 "tooling_hole" H 850 6855 50  0000 L CNN
 F 2 "meshtastic-diy 1W:jlc_toolinghole" H 750 6900 50  0001 C CNN
 F 3 "~" H 750 6900 50  0001 C CNN
-F 4 "all,core,autoprog,psram" H 750 6900 50  0001 C CNN "Config"
+F 4 "" H 750 6900 50  0001 C CNN "Config"
 	1    750  6900
 	1    0    0    -1  
 $EndComp
