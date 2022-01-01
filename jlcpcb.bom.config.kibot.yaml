@@ -49,7 +49,6 @@ outputs:
       units: millimeters
       separate_files_for_front_and_back: false
       only_smd: true
-      dnf_filter: 'exclude_e22_and_esp32'
       columns:
         - id: Ref
           name: Designator
