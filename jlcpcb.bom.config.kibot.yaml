@@ -8,31 +8,37 @@ filters:
     include_only:
       - column: 'LCSC#'
         regex: '^C\d+'
+  - name: exclude_e22_and_esp32
+    comment: 'Exclude E22 and ESP32 modules from CPL'
+    type: generic
+    exclude_refs:
+      - U3
+      - U1
 
 variants:
-  - name: default
+  - name: 'default'
     comment: 'Full schematic'
     type: kibom
     
-  - name: core
+  - name: 'core'
     comment: 'Core board components for pick and place'
     type: kibom
     file_id: _core
     variant: core
 
-  - name: autoprog
+  - name: 'autoprog'
     comment: 'Board with auto-prog circuit but no PSRAM'
     type: kibom
     file_id: _autoprog
     variant: autoprog
 
-  - name: psram
+  - name: 'psram'
     comment: 'Board with PSRAM but no auto-prog circuit'
     type: kibom
     file_id: _psram
     variant: psram
 
-  - name: rotated
+  - name: 'rotated'
     comment: 'Just a place holder for the rotation filter'
     type: kibom
     variant: rotated
@@ -44,6 +50,7 @@ outputs:
     type: position
     options:
       variant: rotated
+      dnf_filter: 'exclude_e22_and_esp32'
       output: '%f_cpl_jlc.%x'
       format: CSV
       units: millimeters
@@ -68,6 +75,7 @@ outputs:
     type: position
     options:
       variant: psram
+      dnf_filter: 'exclude_e22_and_esp32'
       output: '%f_cpl_jlc_auto_prog.%x'
       format: CSV
       units: millimeters
@@ -92,6 +100,7 @@ outputs:
     type: position
     options:
       variant: psram
+      dnf_filter: 'exclude_e22_and_esp32'
       output: '%f_cpl_jlc_psram.%x'
       format: CSV
       units: millimeters
@@ -117,6 +126,7 @@ outputs:
     type: position
     options:
       variant: core
+      dnf_filter: 'exclude_e22_and_esp32'
       output: '%f_cpl_jlc_core.%x'
       format: CSV
       units: millimeters
