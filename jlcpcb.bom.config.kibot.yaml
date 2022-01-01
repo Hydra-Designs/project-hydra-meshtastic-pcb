@@ -74,7 +74,7 @@ outputs:
     comment: "Pick and place file, JLC style (auto-prog)"
     type: position
     options:
-      variant: psram
+      variant: autoprog
       dnf_filter: 'exclude_e22_and_esp32'
       output: '%f_cpl_jlc_auto_prog.%x'
       format: CSV
