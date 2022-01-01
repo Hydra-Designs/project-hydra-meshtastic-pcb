@@ -14,6 +14,16 @@ filters:
     exclude_refs:
       - U3
       - U1
+  - name: exclude_auto_prog
+    comment: 'Exclude auto programming circuit from CPL'
+    type: generic
+    exclude_refs:
+      - U3
+      - U1
+      - R3
+      - R4
+      - Q1
+      - Q2
       
 variants:
   - name: rotated
@@ -34,6 +44,31 @@ outputs:
       separate_files_for_front_and_back: false
       only_smd: true
       dnf_filter: 'exclude_e22_and_esp32'
+      columns:
+        - id: Ref
+          name: Designator
+        - Val
+        - Package
+        - id: PosX
+          name: "Mid X"
+        - id: PosY
+          name: "Mid Y"
+        - id: Rot
+          name: Rotation
+        - id: Side
+          name: Layer
+          
+  - name: 'position (no auto-prog)'
+    comment: "Pick and place file, JLC style (no auto-prog)"
+    type: position
+    options:
+      variant: rotated
+      output: '%f_cpl_jlc.%x'
+      format: CSV
+      units: millimeters
+      separate_files_for_front_and_back: false
+      only_smd: true
+      dnf_filter: 'exclude_auto_prog'
       columns:
         - id: Ref
           name: Designator
