@@ -148,37 +148,37 @@ jobs:
           asset_name: CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
-      - name: Upload Release CPL (No auto prog)
+      - name: Upload Release CPL (Auto prog)
         id: upload-release-cpl-no-auto-prog
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./meshtastic-diy_cpl_jlc_no_auto_prog.csv
-          asset_name: CPL-JLCPCB-NO-AUTO-PROG.${{ env.RELEASE_VERSION }}.csv
+          asset_path: ./meshtastic-diy_cpl_jlc_autoprog.csv
+          asset_name: CPL-JLCPCB-AUTO-PROG.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
-      - name: Upload Release CPL (No PSRAM)
+      - name: Upload Release CPL (PSRAM)
         id: upload-release-cpl-no-psram
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./meshtastic-diy_cpl_jlc_no_psram.csv
-          asset_name: CPL-JLCPCB-NO-PSRAM.${{ env.RELEASE_VERSION }}.csv
+          asset_path: ./meshtastic-diy_cpl_jlc_psram.csv
+          asset_name: CPL-JLCPCB-PSRAM.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
-      - name: Upload Release CPL (Min parts)
-        id: upload-release-cpl-min-parts
+      - name: Upload Release CPL (Core parts)
+        id: upload-release-cpl-core-parts
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./meshtastic-diy_cpl_jlc_min_parts.csv
-          asset_name: CPL-JLCPCB-MINIMUM-PARTS.${{ env.RELEASE_VERSION }}.csv
+          asset_path: ./meshtastic-diy_cpl_jlc_core.csv
+          asset_name: CPL-JLCPCB-CORE-PARTS.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
     
       - name: Upload Release iBoM
