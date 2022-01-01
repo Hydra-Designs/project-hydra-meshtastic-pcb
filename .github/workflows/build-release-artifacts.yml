@@ -149,18 +149,18 @@ jobs:
           asset_content_type: text/csv
 
       - name: Upload Release CPL (Auto prog)
-        id: upload-release-cpl-no-auto-prog
+        id: upload-release-cpl-auto-prog
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./meshtastic-diy_cpl_jlc_autoprog.csv
+          asset_path: ./meshtastic-diy_cpl_jlc_auto_prog.csv
           asset_name: CPL-JLCPCB-AUTO-PROG.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
       - name: Upload Release CPL (PSRAM)
-        id: upload-release-cpl-no-psram
+        id: upload-release-cpl-psram
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
