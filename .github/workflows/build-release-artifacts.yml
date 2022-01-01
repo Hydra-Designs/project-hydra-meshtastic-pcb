@@ -4,8 +4,8 @@ on:
   push:
     paths:
     - '*.properties'
-    - '*.yaml'
-    - '*.yml'
+#     - '*.yaml'
+#     - '*.yml'
   workflow_dispatch:
   
 jobs:
