@@ -239,7 +239,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./BoM/meshtastic-diy-ibom_${{ env.NO_PSRAM_VARIANT }}.html
+          asset_path: ./BoM/meshtastic-diy-ibom${{ env.NO_PSRAM_VARIANT }}.html
           asset_name: ${{ env.NO_PSRAM_FILE_LABEL }}Interactive-BoM.${{ env.RELEASE_VERSION }}.html
           asset_content_type: text/html
 
@@ -250,7 +250,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./BoM/meshtastic-diy-ibom_${{ env.NO_AUTO_PROG_VARIANT }}.html
+          asset_path: ./BoM/meshtastic-diy-ibom${{ env.NO_AUTO_PROG_VARIANT }}.html
           asset_name: ${{ env.NO_AUTO_PROG_FILE_LABEL }}Interactive-BoM.${{ env.RELEASE_VERSION }}.html
           asset_content_type: text/html
 
@@ -261,7 +261,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./BoM/meshtastic-diy-ibom_${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}.html
+          asset_path: ./BoM/meshtastic-diy-ibom${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}.html
           asset_name: ${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}Interactive-BoM.${{ env.RELEASE_VERSION }}.html
           asset_content_type: text/html
 
@@ -276,8 +276,10 @@ jobs:
           asset_name: Gerber-JLCPCB.${{ env.RELEASE_VERSION }}.zip
           asset_content_type: application/zip
           
+    # SCHEMATIC 
+    
       - name: Upload Release Schematic
-        id: upload-release-schematic 
+        id: upload-release-schematic
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -286,7 +288,40 @@ jobs:
           asset_path: ./Schematic.pdf
           asset_name: Schematic.${{ env.RELEASE_VERSION }}.pdf
           asset_content_type: application/pdf
-
+      
+      - name: Upload Release Schematic (No PSRAM)
+        id: upload-release-schematic-no-psram
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Schematic_${{ env.NO_PSRAM_VARIANT }}.pdf
+          asset_name: ${{ env.NO_PSRAM_FILE_LABEL }}Schematic.${{ env.RELEASE_VERSION }}.pdf
+          asset_content_type: application/pdf
+      
+      - name: Upload Release Schematic (No Auto-prog)
+        id: upload-release-schematic-no-auto-prog
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Schematic_${{ env.NO_AUTO_PROG_VARIANT }}.pdf
+          asset_name: ${{ env.NO_AUTO_PROG_FILE_LABEL }}Schematic.${{ env.RELEASE_VERSION }}.pdf
+          asset_content_type: application/pdf
+      
+      - name: Upload Release Schematic (Core parts)
+        id: upload-release-schematic-core
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Schematic_${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}.pdf
+          asset_name: ${{ env.NO_PSRAM_NO_AUTO_PROG_FILE_LABEL }}Schematic.${{ env.RELEASE_VERSION }}.pdf
+          asset_content_type: application/pdf
+          
       # RENDERS
         
       - name: Upload Release STP

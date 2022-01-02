@@ -1,14 +1,58 @@
 kibot:
   version: 1
 
+variants:
+  - name: 'default'
+    comment: 'Full schematic'
+    type: kibom
+    
+  - name: 'core'
+    comment: 'Core board components for pick and place'
+    type: kibom
+    file_id: core
+    variant: core
+
+  - name: 'autoprog'
+    comment: 'Board with auto-prog circuit but no PSRAM'
+    type: kibom
+    file_id: autoprog
+    variant: autoprog
+
+  - name: 'psram'
+    comment: 'Board with PSRAM but no auto-prog circuit'
+    type: kibom
+    file_id: psram
+    variant: psram
+
 outputs:
 
-  - name: 'print_sch'
+  - name: 'schematic (full)'
     comment: "Print schematic (PDF)"
     type: pdf_sch_print
     dir: .
     options:
       output: Schematic.pdf
+
+  - name: 'schematic (psram)'
+    type: pdf_sch_print
+    dir: .
+    options:
+      variant: psram
+      output: Schematic_%v.pdf
+
+  - name: 'schematic (autoprog)'
+    type: pdf_sch_print
+    dir: .
+    options:
+      variant: autoprog
+      output: Schematic_%v.pdf
+
+  - name: 'schematic (core)'
+    type: pdf_sch_print
+    dir: .
+    options:
+      variant: core
+      output: Schematic_%v.pdf
 
   - name: board_top
     comment: "Top layer view"
