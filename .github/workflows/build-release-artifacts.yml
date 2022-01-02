@@ -70,6 +70,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+      NO_PSRAM_VARIANT: 'autoprog'
+      NO_PSRAM_FILE_LABEL: '(No PSRAM)'
+      NO_AUTO_PROG_VARIANT: 'psram'
+      NO_AUTO_PROG_FILE: '(No Auto-prog)'
+      NO_PSRAM_NO_AUTO_PROG_VARIANT: 'core'
+      NO_PSRAM_NO_AUTO_PROG_FILE: '(No PSRAM No Auto-prog)'
+
     needs: [Build-Gerber, Build-BOM, Build-Renders]
     steps:
       - uses: actions/checkout@v1
@@ -115,7 +122,7 @@ jobs:
       - name: Show artifacts # For diagnostics
         run: ls -lR 
         
-      - name: Create Release Full
+      - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -123,36 +130,6 @@ jobs:
         with:
           tag_name: ${{ env.RELEASE_VERSION }}
           release_name: v${{ env.RELEASE_VERSION }} Full
-          draft: false
-          prerelease: true
-
-      - name: Create Release No PSRAM
-        id: create_release_no_psram
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_name: v${{ env.RELEASE_VERSION }} No PSRAM variant
-          draft: false
-          prerelease: true
-
-      - name: Create Release No Auto-prog
-        id: create_release_no_auto_prog
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_name: v${{ env.RELEASE_VERSION }} No Auto-prog variant
-          draft: false
-          prerelease: true
-
-      - name: Create Release No PSRAM Auto-prog
-        id: create_release_no_psram_auto_prog
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_name: v${{ env.RELEASE_VERSION }} No PSRAM / Auto-prog variant
           draft: false
           prerelease: true
 
@@ -184,9 +161,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release_no_auto_prog.outputs.upload_url }}
-          asset_path: ./meshtastic-diy_cpl_jlc_psram.csv
-          asset_name: CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./meshtastic-diy_cpl_jlc_${{ env.NO_AUTO_PROG_VARIANT }}.csv
+          asset_name: ${{ env.NO_AUTO_PROG_FILE }}CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
       - name: Upload Release CPL (No PSRAM)
@@ -195,9 +172,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release_no_psram.outputs.upload_url }}
-          asset_path: ./meshtastic-diy_cpl_jlc_auto_prog.csv
-          asset_name: CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./meshtastic-diy_cpl_jlc_${{ env.NO_PSRAM_VARIANT }}.csv
+          asset_name: ${{ env.NO_PSRAM_FILE }}CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
       - name: Upload Release CPL (No Auto-prog / PSRAM )
@@ -206,9 +183,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release_no_psram_auto_prog.outputs.upload_url }}
-          asset_path: ./meshtastic-diy_cpl_jlc_core.csv
-          asset_name: CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./meshtastic-diy_cpl_jlc_${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}.csv
+          asset_name: ${{ env.NO_PSRAM_NO_AUTO_PROG_FILE }}CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
     
       - name: Upload Release iBoM
@@ -243,7 +220,9 @@ jobs:
           asset_path: ./Schematic.pdf
           asset_name: Schematic.${{ env.RELEASE_VERSION }}.pdf
           asset_content_type: application/pdf
-          
+
+      # RENDERS
+        
       - name: Upload Release STP
         id: upload-release-stp 
         uses: actions/upload-release-asset@v1

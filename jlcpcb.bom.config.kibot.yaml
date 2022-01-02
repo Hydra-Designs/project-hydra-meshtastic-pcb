@@ -76,7 +76,7 @@ outputs:
     options:
       variant: autoprog
       dnf_filter: 'exclude_e22_and_esp32'
-      output: '%f_cpl_jlc_auto_prog.%x'
+      output: '%f_cpl_jlc_autoprog.%x'
       format: CSV
       units: millimeters
       separate_files_for_front_and_back: false
