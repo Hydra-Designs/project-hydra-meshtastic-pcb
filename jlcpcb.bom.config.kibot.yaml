@@ -23,19 +23,19 @@ variants:
   - name: 'core'
     comment: 'Core board components for pick and place'
     type: kibom
-    file_id: _core
+    file_id: core
     variant: core
 
   - name: 'autoprog'
     comment: 'Board with auto-prog circuit but no PSRAM'
     type: kibom
-    file_id: _autoprog
+    file_id: autoprog
     variant: autoprog
 
   - name: 'psram'
     comment: 'Board with PSRAM but no auto-prog circuit'
     type: kibom
-    file_id: _psram
+    file_id: psram
     variant: psram
 
   - name: 'rotated'
@@ -76,7 +76,7 @@ outputs:
     options:
       variant: autoprog
       dnf_filter: 'exclude_e22_and_esp32'
-      output: '%f_cpl_jlc_autoprog.%x'
+      output: '%f_cpl_jlc_%v.%x'
       format: CSV
       units: millimeters
       separate_files_for_front_and_back: false
@@ -101,7 +101,7 @@ outputs:
     options:
       variant: psram
       dnf_filter: 'exclude_e22_and_esp32'
-      output: '%f_cpl_jlc_psram.%x'
+      output: '%f_cpl_jlc_%v.%x'
       format: CSV
       units: millimeters
       separate_files_for_front_and_back: false
@@ -127,7 +127,7 @@ outputs:
     options:
       variant: core
       dnf_filter: 'exclude_e22_and_esp32'
-      output: '%f_cpl_jlc_core.%x'
+      output: '%f_cpl_jlc_%v.%x'
       format: CSV
       units: millimeters
       separate_files_for_front_and_back: false
@@ -146,7 +146,7 @@ outputs:
         - id: Side
           name: Layer
           
-  - name: 'bom'
+  - name: 'bom (default)'
     comment: "BoM for JLC/LCSC"
     type: bom
     options:
@@ -166,10 +166,95 @@ outputs:
         hide_stats_info: true
         quote_all: true
 
-  - name: 'interactive_bom'
+  - name: 'bom (psram)'
+    comment: "BoM for JLC/LCSC"
+    type: bom
+    options:
+      variant: psram
+      output: '%f_%i_jlc_%v.%x'
+      exclude_filter: 'only_jlc_parts'
+      ref_separator: ','
+      columns:
+        - field: Value
+          name: Comment
+        - field: References
+          name: Designator
+        - Footprint
+        - field: 'LCSC#'
+          name: 'LCSC Part #'
+      csv:
+        hide_pcb_info: true
+        hide_stats_info: true
+        quote_all: true
+
+  - name: 'bom (autoprog)'
+    comment: "BoM for JLC/LCSC"
+    type: bom
+    options:
+      variant: psram
+      output: '%f_%i_jlc_%v.%x'
+      exclude_filter: 'only_jlc_parts'
+      ref_separator: ','
+      columns:
+        - field: Value
+          name: Comment
+        - field: References
+          name: Designator
+        - Footprint
+        - field: 'LCSC#'
+          name: 'LCSC Part #'
+      csv:
+        hide_pcb_info: true
+        hide_stats_info: true
+        quote_all: true
+
+  - name: 'bom (core)'
+    comment: "BoM for JLC/LCSC"
+    type: bom
+    options:
+      variant: psram
+      output: '%f_%i_jlc_%v.%x'
+      exclude_filter: 'only_jlc_parts'
+      ref_separator: ','
+      columns:
+        - field: Value
+          name: Comment
+        - field: References
+          name: Designator
+        - Footprint
+        - field: 'LCSC#'
+          name: 'LCSC Part #'
+      csv:
+        hide_pcb_info: true
+        hide_stats_info: true
+        quote_all: true
+
+  - name: 'interactive_bom (default)'
     comment: "Interactive Bill of Materials (HTML)"
     type: ibom
     dir: BoM
     options:
       blacklist: 'DNF*'
       name_format: '%f_iBoM'
+
+  - name: 'interactive_bom (psram)'
+    type: ibom
+    dir: BoM
+    options:
+      blacklist: 'DNF*'
+      name_format: '%f_iBoM_%v'
+  
+  - name: 'interactive_bom (autoprog)'
+    type: ibom
+    dir: BoM
+    options:
+      blacklist: 'DNF*'
+      name_format: '%f_iBoM_%v'
+  
+  - name: 'interactive_bom (core)'
+    type: ibom
+    dir: BoM
+    options:
+      blacklist: 'DNF*'
+      name_format: '%f_iBoM_%v'
+  

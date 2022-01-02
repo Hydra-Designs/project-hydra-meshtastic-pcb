@@ -143,6 +143,39 @@ jobs:
           asset_path: ./meshtastic-diy_bom_jlc.csv
           asset_name: BoM-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
+
+      - name: Upload Release BoM (No PSRAM)
+        id: upload-release-bom-no-psram
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./meshtastic-diy_bom_jlc_${{ env.NO_PSRAM_VARIANT }}.csv
+          asset_name: ${{ env.NO_PSRAM_FILE_LABEL }}BoM-JLCPCB.${{ env.RELEASE_VERSION }}.csv
+          asset_content_type: text/csv
+      
+      - name: Upload Release BoM (No Auto-prog)
+        id: upload-release-bom-no-auto-prog
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./meshtastic-diy_bom_jlc_${{ env.NO_AUTO_PROG_VARIANT }}.csv
+          asset_name: ${{ env.NO_AUTO_PROG_FILE_LABEL }}BoM-JLCPCB.${{ env.RELEASE_VERSION }}.csv
+          asset_content_type: text/csv
+      
+      - name: Upload Release BoM (No Auto-prog / PSRAM)
+        id: upload-release-bom-core-parts
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./meshtastic-diy_bom_jlc_${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}.csv
+          asset_name: ${{ env.NO_PSRAM_NO_AUTO_PROG_FILE_LABEL }}BoM-JLCPCB.${{ env.RELEASE_VERSION }}.csv
+          asset_content_type: text/csv
           
       - name: Upload Release CPL
         id: upload-release-cpl 
@@ -177,7 +210,7 @@ jobs:
           asset_name: ${{ env.NO_PSRAM_FILE_LABEL }}CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
-      - name: Upload Release CPL (No Auto-prog / PSRAM )
+      - name: Upload Release CPL (No Auto-prog / PSRAM)
         id: upload-release-cpl-core-parts
         uses: actions/upload-release-asset@v1
         env:
@@ -198,7 +231,40 @@ jobs:
           asset_path: ./BoM/meshtastic-diy-ibom.html
           asset_name: Interactive-BoM.${{ env.RELEASE_VERSION }}.html
           asset_content_type: text/html
-          
+
+      - name: Upload Release iBoM (No PSRAM)
+        id: upload-release-ibom-no-psram
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./BoM/meshtastic-diy-ibom_${{ env.NO_PSRAM_VARIANT }}.html
+          asset_name: ${{ env.NO_PSRAM_FILE_LABEL }}Interactive-BoM.${{ env.RELEASE_VERSION }}.html
+          asset_content_type: text/html
+
+      - name: Upload Release iBoM (No Auto-prog)
+        id: upload-release-ibom-no-auto-prog
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./BoM/meshtastic-diy-ibom_${{ env.NO_AUTO_PROG_VARIANT }}.html
+          asset_name: ${{ env.NO_AUTO_PROG_FILE_LABEL }}Interactive-BoM.${{ env.RELEASE_VERSION }}.html
+          asset_content_type: text/html
+
+      - name: Upload Release iBoM (Core parts)
+        id: upload-release-ibom-core
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./BoM/meshtastic-diy-ibom_${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}.html
+          asset_name: ${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}Interactive-BoM.${{ env.RELEASE_VERSION }}.html
+          asset_content_type: text/html
+
       - name: Upload Release Gerber
         id: upload-release-gerber 
         uses: actions/upload-release-asset@v1
