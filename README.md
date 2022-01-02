@@ -9,7 +9,7 @@ A minimalist PCB design built around the Ebyte E22-900M30S 30dbm (1 watt) LoRA r
 ![image](https://user-images.githubusercontent.com/93053584/147751815-7f1c6b5d-7117-42f1-9bb8-27cf09a20849.png)
 
 ## Features
-- Supports up to 30dbm (1 watt) transmit power
+- Supports up to 30dbm (1 watt) transmit power *(Please check local ISM band regulations for power limitations)*
 - OLED support via I2C
 - GPS support via UART
 - PSRAM support
@@ -20,7 +20,7 @@ A minimalist PCB design built around the Ebyte E22-900M30S 30dbm (1 watt) LoRA r
 - 3.3V output (or input if onboard buck converter is not assembled)
 - Two GPIO reserved for future use (for example power control)
 - Programmable via USB-Serial adapter (RTS/DTR are required for the on-board auto reset!)
-- Compatible with "meshtastic-diy-v1" target
+- Compatible with "meshtastic-diy-v1" target in Meshtastic-device firmware
 
 
 ## Project status
