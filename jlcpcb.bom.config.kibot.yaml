@@ -147,7 +147,7 @@ outputs:
           name: Layer
           
   - name: 'bom'
-    comment: "BoM for JLC"
+    comment: "BoM for JLC/LCSC"
     type: bom
     options:
       output: '%f_%i_jlc.%x'

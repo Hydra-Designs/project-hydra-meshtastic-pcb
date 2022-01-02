@@ -115,24 +115,57 @@ jobs:
       - name: Show artifacts # For diagnostics
         run: ls -lR 
         
-      - name: Create Release
+      - name: Create Release Full
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ env.RELEASE_VERSION }}
-          release_name: v${{ env.RELEASE_VERSION }}
+          release_name: v${{ env.RELEASE_VERSION }} Full
           draft: false
           prerelease: true
-          
+
+      - name: Create Release No PSRAM
+        id: create_release_no_psram
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.RELEASE_VERSION }}
+          release_name: v${{ env.RELEASE_VERSION }} No PSRAM variant
+          draft: false
+          prerelease: true
+
+      - name: Create Release No Auto-prog
+        id: create_release_no_auto_prog
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.RELEASE_VERSION }}
+          release_name: v${{ env.RELEASE_VERSION }} No Auto-prog variant
+          draft: false
+          prerelease: true
+
+     - name: Create Release No PSRAM Auto-prog
+        id: create_release_no_psram_auto_prog
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.RELEASE_VERSION }}
+          release_name: v${{ env.RELEASE_VERSION }} No PSRAM / Auto-prog variant
+          draft: false
+          prerelease: true
+
       - name: Upload Release BoM
         id: upload-release-bom 
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./meshtastic-diy_bom_jlc.csv
           asset_name: BoM-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
@@ -143,42 +176,42 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./meshtastic-diy_cpl_jlc.csv
           asset_name: CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
-      - name: Upload Release CPL (Auto prog)
+      - name: Upload Release CPL (No Auto prog)
         id: upload-release-cpl-auto-prog
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./meshtastic-diy_cpl_jlc_auto_prog.csv
-          asset_name: CPL-JLCPCB-AUTO-PROG.${{ env.RELEASE_VERSION }}.csv
+          upload_url: ${{ steps.create_release_no_auto_prog.outputs.upload_url }}
+          asset_path: ./meshtastic-diy_cpl_jlc_psram.csv
+          asset_name: CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
-      - name: Upload Release CPL (PSRAM)
+      - name: Upload Release CPL (No PSRAM)
         id: upload-release-cpl-psram
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./meshtastic-diy_cpl_jlc_psram.csv
-          asset_name: CPL-JLCPCB-PSRAM.${{ env.RELEASE_VERSION }}.csv
+          upload_url: ${{ steps.create_release_no_psram.outputs.upload_url }}
+          asset_path: ./meshtastic-diy_cpl_jlc_auto_prog.csv
+          asset_name: CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
-      - name: Upload Release CPL (Core parts)
+      - name: Upload Release CPL (No Auto-prog / PSRAM )
         id: upload-release-cpl-core-parts
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release_no_psram_auto_prog.outputs.upload_url }}
           asset_path: ./meshtastic-diy_cpl_jlc_core.csv
-          asset_name: CPL-JLCPCB-CORE-PARTS.${{ env.RELEASE_VERSION }}.csv
+          asset_name: CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
     
       - name: Upload Release iBoM
@@ -187,7 +220,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./BoM/meshtastic-diy-ibom.html
           asset_name: Interactive-BoM.${{ env.RELEASE_VERSION }}.html
           asset_content_type: text/html
@@ -198,7 +231,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./JLCPCB/meshtastic-diy-JLCPCB.zip
           asset_name: Gerber-JLCPCB.${{ env.RELEASE_VERSION }}.zip
           asset_content_type: application/zip
@@ -209,7 +242,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./Schematic.pdf
           asset_name: Schematic.${{ env.RELEASE_VERSION }}.pdf
           asset_content_type: application/pdf
@@ -220,7 +253,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./PCB-Model.stp
           asset_name: PCB-Model.${{ env.RELEASE_VERSION }}.stp
           asset_content_type: application/octet-stream
@@ -231,7 +264,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./PCB-Top.jpg
           asset_name: PCB-Top.${{ env.RELEASE_VERSION }}.jpg
           asset_content_type: image/jpeg
@@ -242,7 +275,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./PCB-Bottom.jpg
           asset_name: PCB-Bottom.${{ env.RELEASE_VERSION }}.jpg
           asset_content_type: image/jpeg
