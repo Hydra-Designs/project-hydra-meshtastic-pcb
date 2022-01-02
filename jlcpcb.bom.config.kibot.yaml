@@ -191,7 +191,7 @@ outputs:
     comment: "BoM for JLC/LCSC"
     type: bom
     options:
-      variant: psram
+      variant: autoprog
       output: '%f_%i_jlc_%v.%x'
       exclude_filter: 'only_jlc_parts'
       ref_separator: ','
@@ -212,7 +212,7 @@ outputs:
     comment: "BoM for JLC/LCSC"
     type: bom
     options:
-      variant: psram
+      variant: core
       output: '%f_%i_jlc_%v.%x'
       exclude_filter: 'only_jlc_parts'
       ref_separator: ','
@@ -241,6 +241,7 @@ outputs:
     type: ibom
     dir: BoM
     options:
+      variant: psram
       blacklist: 'DNF*'
       name_format: '%f_iBoM_%v'
   
@@ -248,6 +249,7 @@ outputs:
     type: ibom
     dir: BoM
     options:
+      variant: autoprog
       blacklist: 'DNF*'
       name_format: '%f_iBoM_%v'
   
@@ -255,6 +257,7 @@ outputs:
     type: ibom
     dir: BoM
     options:
+      variant: core
       blacklist: 'DNF*'
       name_format: '%f_iBoM_%v'
   
