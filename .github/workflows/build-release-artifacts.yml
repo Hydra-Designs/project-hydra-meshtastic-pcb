@@ -73,9 +73,9 @@ jobs:
       NO_PSRAM_VARIANT: 'autoprog'
       NO_PSRAM_FILE_LABEL: '(No PSRAM)'
       NO_AUTO_PROG_VARIANT: 'psram'
-      NO_AUTO_PROG_FILE: '(No Auto-prog)'
+      NO_AUTO_PROG_FILE_LABEL: '(No Auto-prog)'
       NO_PSRAM_NO_AUTO_PROG_VARIANT: 'core'
-      NO_PSRAM_NO_AUTO_PROG_FILE: '(No PSRAM No Auto-prog)'
+      NO_PSRAM_NO_AUTO_PROG_FILE_LABEL: '(No PSRAM No Auto-prog)'
 
     needs: [Build-Gerber, Build-BOM, Build-Renders]
     steps:
@@ -163,7 +163,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./meshtastic-diy_cpl_jlc_${{ env.NO_AUTO_PROG_VARIANT }}.csv
-          asset_name: ${{ env.NO_AUTO_PROG_FILE }}CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
+          asset_name: ${{ env.NO_AUTO_PROG_FILE_LABEL }}CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
       - name: Upload Release CPL (No PSRAM)
@@ -174,7 +174,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./meshtastic-diy_cpl_jlc_${{ env.NO_PSRAM_VARIANT }}.csv
-          asset_name: ${{ env.NO_PSRAM_FILE }}CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
+          asset_name: ${{ env.NO_PSRAM_FILE_LABEL }}CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
       - name: Upload Release CPL (No Auto-prog / PSRAM )
@@ -185,7 +185,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./meshtastic-diy_cpl_jlc_${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}.csv
-          asset_name: ${{ env.NO_PSRAM_NO_AUTO_PROG_FILE }}CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
+          asset_name: ${{ env.NO_PSRAM_NO_AUTO_PROG_FILE_LABEL }}CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
     
       - name: Upload Release iBoM
