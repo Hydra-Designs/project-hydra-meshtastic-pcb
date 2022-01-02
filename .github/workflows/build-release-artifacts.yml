@@ -262,7 +262,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./BoM/meshtastic-diy-ibom${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}.html
-          asset_name: ${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}Interactive-BoM.${{ env.RELEASE_VERSION }}.html
+          asset_name: ${{ env.NO_PSRAM_NO_AUTO_PROG_FILE_LABEL }}Interactive-BoM.${{ env.RELEASE_VERSION }}.html
           asset_content_type: text/html
 
       - name: Upload Release Gerber
@@ -277,7 +277,7 @@ jobs:
           asset_content_type: application/zip
           
     # SCHEMATIC 
-    
+
       - name: Upload Release Schematic
         id: upload-release-schematic
         uses: actions/upload-release-asset@v1
