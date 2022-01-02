@@ -148,7 +148,7 @@ jobs:
           draft: false
           prerelease: true
 
-     - name: Create Release No PSRAM Auto-prog
+      - name: Create Release No PSRAM Auto-prog
         id: create_release_no_psram_auto_prog
         uses: actions/create-release@v1
         env:
