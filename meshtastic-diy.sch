@@ -842,7 +842,7 @@ Text Label 9800 1600 2    50   ~ 0
 5V_pwrctrl
 Text Label 9800 1500 2    50   ~ 0
 vbat_mon
-Text Label 9800 2000 2    50   ~ 0
+Text Label 9800 2100 2    50   ~ 0
 GPS_TX
 $Comp
 L power:+3.3V #PWR0112
@@ -1013,7 +1013,7 @@ F 3 "" H 9800 2200 50  0001 C CNN
 $EndComp
 Text Label 2500 4050 0    50   ~ 0
 GPS_RX
-Text Label 9800 2100 2    50   ~ 0
+Text Label 9800 2000 2    50   ~ 0
 GPS_RX
 $Comp
 L power:+5V #PWR011
