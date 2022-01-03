@@ -80,7 +80,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: NoPSRAM+NoAuto-Prog.zip
-        path: NoPSRAM+NoAuto-Prog
+        path: Core
 
   Release-Artifacts:
     name: Release Artifacts
