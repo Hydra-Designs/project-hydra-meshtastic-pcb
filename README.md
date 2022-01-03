@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-A minimalist PCB design built around the Ebyte E22-900M30S 30dbm (1 watt) LoRA radio and the ESP32-WROOM-32U mpu compatible with the [Meshtastic-device](https://github.com/meshtastic/Meshtastic-device) firmware. 
+A minimalist PCB design built around the Ebyte E22-900M30S 30dbm (1 watt) LoRA radio and the ESP32-WROOM-32U cpu compatible with the [Meshtastic-device](https://github.com/meshtastic/Meshtastic-device) firmware. 
 
 ![image](https://user-images.githubusercontent.com/93053584/147958065-cc98ba30-0f0b-4a98-ab02-f6d852b78876.png)
 
