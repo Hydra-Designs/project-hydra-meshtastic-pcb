@@ -10,14 +10,14 @@ on:
   
 jobs:
           
-  Build-Gerber:
+  Build-Full:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: INTI-CMNB/KiBot@v1
       with:
-        config: jlcpcb.gerber.config.kibot.yaml
-        dir: Gerber
+        config: jlcpcb.full.config.kibot.yaml
+        dir: Full
         schema: 'meshtastic-diy.sch'
         board: 'meshtastic-diy.kicad_pcb'
     - name: Show artifacts # For diagnostics
@@ -25,35 +25,53 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: Gerber.zip
-        path: Gerber
+        name: Full.zip
+        path: Full
+  
+  # Build-PSRAM:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - uses: INTI-CMNB/KiBot@v1
+  #     with:
+  #       config: jlcpcb.psram.config.kibot.yaml
+  #       dir: PSRAM
+  #       schema: 'meshtastic-diy.sch'
+  #       board: 'meshtastic-diy.kicad_pcb'
+  #   - name: Show artifacts # For diagnostics
+  #     run: ls -lR 
+  #   - name: Upload artifacts
+  #     uses: actions/upload-artifact@v2
+  #     with:
+  #       name: PSRAM.zip
+  #       path: PSRAM
 
-  Build-BOM:
+  # Build-AutoProg:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - uses: INTI-CMNB/KiBot@v1
+  #     with:
+  #       config: jlcpcb.psram.config.kibot.yaml
+  #       dir: AutoProg
+  #       schema: 'meshtastic-diy.sch'
+  #       board: 'meshtastic-diy.kicad_pcb'
+  #   - name: Show artifacts # For diagnostics
+  #     run: ls -lR 
+  #   - name: Upload artifacts
+  #     uses: actions/upload-artifact@v2
+  #     with:
+  #       name: AutoProg.zip
+  #       path: AutoProg
+
+  Build-Core:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: INTI-CMNB/KiBot@v1
       with:
-        config: jlcpcb.bom.config.kibot.yaml
-        dir: BOM
-        schema: 'meshtastic-diy.sch'
-        board: 'meshtastic-diy.kicad_pcb'
-    - name: Show artifacts # For diagnostics
-      run: ls -lR
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: BOM.zip
-        path: BOM
-        
-  Build-Renders:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: INTI-CMNB/KiBot@v1
-      with:
-        config: jlcpcb.render.config.kibot.yaml
-        dir: Render
+        config: jlcpcb.psram.config.kibot.yaml
+        dir: Core
         schema: 'meshtastic-diy.sch'
         board: 'meshtastic-diy.kicad_pcb'
     - name: Show artifacts # For diagnostics
@@ -61,23 +79,22 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: Render.zip
-        path: Render       
-
+        name: NoPSRAM+NoAuto-Prog.zip
+        path: NoPSRAM+NoAuto-Prog
 
   Release-Artifacts:
     name: Release Artifacts
     runs-on: ubuntu-latest
     env:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-      NO_PSRAM_VARIANT: 'autoprog'
-      NO_PSRAM_FILE_LABEL: '(No PSRAM)'
-      NO_AUTO_PROG_VARIANT: 'psram'
-      NO_AUTO_PROG_FILE_LABEL: '(No Auto-prog)'
-      NO_PSRAM_NO_AUTO_PROG_VARIANT: 'core'
-      NO_PSRAM_NO_AUTO_PROG_FILE_LABEL: '(No PSRAM No Auto-prog)'
+      # NO_PSRAM_VARIANT: 'autoprog'
+      # NO_PSRAM_FILE_LABEL: '(No PSRAM)'
+      # NO_AUTO_PROG_VARIANT: 'psram'
+      # NO_AUTO_PROG_FILE_LABEL: '(No Auto-prog)'
+      # NO_PSRAM_NO_AUTO_PROG_VARIANT: 'core'
+      # NO_PSRAM_NO_AUTO_PROG_FILE_LABEL: '(No PSRAM No Auto-prog)'
 
-    needs: [Build-Gerber, Build-BOM, Build-Renders]
+    needs: [Build-Full, Build-Core] #Build-PSRAM, Build-AutoProg]
     steps:
       - uses: actions/checkout@v1
       - name: Set Major Version
@@ -98,27 +115,20 @@ jobs:
         id: set_release_version
         run: echo ::set-env name=RELEASE_VERSION::${{ steps.major_version.outputs.value }}.${{ steps.minor_version.outputs.value }}
          
-      - name: Download Gerber
-        id: download_gerber
+      - name: Download core
+        id: download_core
         uses: actions/download-artifact@master
         with:
-          name: Gerber.zip
-          path: ./
-          
-      - name: Download BOM
-        id: download_bom
+          name: NoPSRAM+NoAuto-Prog.zip
+          path: ./NoPSRAM+NoAuto-Prog
+      
+      - name: Download full
+        id: download_full
         uses: actions/download-artifact@master
         with:
-          name: BOM.zip
+          name: Full.zip
           path: ./
-               
-      - name: Download Render
-        id: download_render
-        uses: actions/download-artifact@master
-        with:
-          name: Render.zip
-          path: ./
-          
+
       - name: Show artifacts # For diagnostics
         run: ls -lR 
         
@@ -144,39 +154,6 @@ jobs:
           asset_name: BoM-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
-      - name: Upload Release BoM (No PSRAM)
-        id: upload-release-bom-no-psram
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./meshtastic-diy_bom_jlc_${{ env.NO_PSRAM_VARIANT }}.csv
-          asset_name: ${{ env.NO_PSRAM_FILE_LABEL }}BoM-JLCPCB.${{ env.RELEASE_VERSION }}.csv
-          asset_content_type: text/csv
-      
-      - name: Upload Release BoM (No Auto-prog)
-        id: upload-release-bom-no-auto-prog
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./meshtastic-diy_bom_jlc_${{ env.NO_AUTO_PROG_VARIANT }}.csv
-          asset_name: ${{ env.NO_AUTO_PROG_FILE_LABEL }}BoM-JLCPCB.${{ env.RELEASE_VERSION }}.csv
-          asset_content_type: text/csv
-      
-      - name: Upload Release BoM (No Auto-prog / PSRAM)
-        id: upload-release-bom-core-parts
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./meshtastic-diy_bom_jlc_${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}.csv
-          asset_name: ${{ env.NO_PSRAM_NO_AUTO_PROG_FILE_LABEL }}BoM-JLCPCB.${{ env.RELEASE_VERSION }}.csv
-          asset_content_type: text/csv
-          
       - name: Upload Release CPL
         id: upload-release-cpl 
         uses: actions/upload-release-asset@v1
@@ -188,39 +165,6 @@ jobs:
           asset_name: CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
           asset_content_type: text/csv
 
-      - name: Upload Release CPL (No Auto prog)
-        id: upload-release-cpl-auto-prog
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./meshtastic-diy_cpl_jlc_${{ env.NO_AUTO_PROG_VARIANT }}.csv
-          asset_name: ${{ env.NO_AUTO_PROG_FILE_LABEL }}CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
-          asset_content_type: text/csv
-
-      - name: Upload Release CPL (No PSRAM)
-        id: upload-release-cpl-psram
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./meshtastic-diy_cpl_jlc_${{ env.NO_PSRAM_VARIANT }}.csv
-          asset_name: ${{ env.NO_PSRAM_FILE_LABEL }}CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
-          asset_content_type: text/csv
-
-      - name: Upload Release CPL (No Auto-prog / PSRAM)
-        id: upload-release-cpl-core-parts
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./meshtastic-diy_cpl_jlc_${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}.csv
-          asset_name: ${{ env.NO_PSRAM_NO_AUTO_PROG_FILE_LABEL }}CPL-JLCPCB.${{ env.RELEASE_VERSION }}.csv
-          asset_content_type: text/csv
-    
       - name: Upload Release iBoM
         id: upload-release-ibom 
         uses: actions/upload-release-asset@v1
@@ -228,41 +172,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./BoM/meshtastic-diy-ibom.html
+          asset_path: ./meshtastic-diy-ibom.html
           asset_name: Interactive-BoM.${{ env.RELEASE_VERSION }}.html
-          asset_content_type: text/html
-
-      - name: Upload Release iBoM (No PSRAM)
-        id: upload-release-ibom-no-psram
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./BoM/meshtastic-diy-ibom${{ env.NO_PSRAM_VARIANT }}.html
-          asset_name: ${{ env.NO_PSRAM_FILE_LABEL }}Interactive-BoM.${{ env.RELEASE_VERSION }}.html
-          asset_content_type: text/html
-
-      - name: Upload Release iBoM (No Auto-prog)
-        id: upload-release-ibom-no-auto-prog
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./BoM/meshtastic-diy-ibom${{ env.NO_AUTO_PROG_VARIANT }}.html
-          asset_name: ${{ env.NO_AUTO_PROG_FILE_LABEL }}Interactive-BoM.${{ env.RELEASE_VERSION }}.html
-          asset_content_type: text/html
-
-      - name: Upload Release iBoM (Core parts)
-        id: upload-release-ibom-core
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./BoM/meshtastic-diy-ibom${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}.html
-          asset_name: ${{ env.NO_PSRAM_NO_AUTO_PROG_FILE_LABEL }}Interactive-BoM.${{ env.RELEASE_VERSION }}.html
           asset_content_type: text/html
 
       - name: Upload Release Gerber
@@ -276,7 +187,7 @@ jobs:
           asset_name: Gerber-JLCPCB.${{ env.RELEASE_VERSION }}.zip
           asset_content_type: application/zip
           
-    # SCHEMATIC 
+      # SCHEMATIC 
 
       - name: Upload Release Schematic
         id: upload-release-schematic
@@ -289,39 +200,6 @@ jobs:
           asset_name: Schematic.${{ env.RELEASE_VERSION }}.pdf
           asset_content_type: application/pdf
       
-      - name: Upload Release Schematic (No PSRAM)
-        id: upload-release-schematic-no-psram
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Schematic_${{ env.NO_PSRAM_VARIANT }}.pdf
-          asset_name: ${{ env.NO_PSRAM_FILE_LABEL }}Schematic.${{ env.RELEASE_VERSION }}.pdf
-          asset_content_type: application/pdf
-      
-      - name: Upload Release Schematic (No Auto-prog)
-        id: upload-release-schematic-no-auto-prog
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Schematic_${{ env.NO_AUTO_PROG_VARIANT }}.pdf
-          asset_name: ${{ env.NO_AUTO_PROG_FILE_LABEL }}Schematic.${{ env.RELEASE_VERSION }}.pdf
-          asset_content_type: application/pdf
-      
-      - name: Upload Release Schematic (Core parts)
-        id: upload-release-schematic-core
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Schematic_${{ env.NO_PSRAM_NO_AUTO_PROG_VARIANT }}.pdf
-          asset_name: ${{ env.NO_PSRAM_NO_AUTO_PROG_FILE_LABEL }}Schematic.${{ env.RELEASE_VERSION }}.pdf
-          asset_content_type: application/pdf
-          
       # RENDERS
         
       - name: Upload Release STP
@@ -356,3 +234,14 @@ jobs:
           asset_path: ./PCB-Bottom.jpg
           asset_name: PCB-Bottom.${{ env.RELEASE_VERSION }}.jpg
           asset_content_type: image/jpeg
+
+      - name: Upload Core
+        id: upload-release-core 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./NoPSRAM+NoAuto-Prog
+          asset_name: NoPSRAM+NoAuto-Prog.${{ env.RELEASE_VERSION }}.zip
+          asset_content_type: application/zip
