@@ -87,7 +87,7 @@ jobs:
     - name: Show artifacts # For diagnostics
       run: ls -lR 
     - name: Zip variant artifacts
-      run: zip NoAuto-Prog.zip ./variant/* -r --junk-paths
+      run: zip NoPSRAM.zip ./variant/* -r --junk-paths
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:

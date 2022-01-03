@@ -81,7 +81,7 @@ outputs:
     options:
       variant: %variant
       blacklist: 'DNF*'
-      name_format: 'Interactive-BoM'
+      output: 'Interactive-BoM.html'
   
   - name: 'schematic'
     type: pdf_sch_print
