@@ -16,11 +16,11 @@ filters:
       - U1
 
 variants:
-  - name: 'core'
-    comment: 'Core board components for pick and place'
+  - name: '%variant'
+    comment: 'Variant board components for pick and place'
     type: kibom
-    file_id: core
-    variant: core
+    file_id: %variant
+    variant: %variant
 
   - name: 'rotated'
     comment: 'Just a place holder for the rotation filter'
@@ -30,13 +30,13 @@ variants:
 
 outputs:
        
-  - name: 'position (core)'
-    comment: "Pick and place file, JLC style (minimum core parts)"
+  - name: 'position'
+    comment: 'Pick and place file, JLC style'
     type: position
     options:
-      variant: core
+      variant: %variant
       dnf_filter: 'exclude_e22_and_esp32'
-      output: '%f_cpl_jlc.%x'
+      output: 'CPL-JLCPCB.%x'
       format: CSV
       units: millimeters
       separate_files_for_front_and_back: false
@@ -55,12 +55,12 @@ outputs:
         - id: Side
           name: Layer
 
-  - name: 'bom (core)'
+  - name: 'bom'
     comment: "BoM for JLC/LCSC"
     type: bom
     options:
-      variant: core
-      output: '%f_%i_jlc.%x'
+      variant: %variant
+      output: 'BoM-JLCPCB.%x'
       exclude_filter: 'only_jlc_parts'
       ref_separator: ','
       columns:
@@ -76,16 +76,16 @@ outputs:
         hide_stats_info: true
         quote_all: true
 
-  - name: 'interactive_bom (core)'
+  - name: 'interactive_bom'
     type: ibom
     options:
-      variant: core
+      variant: %variant
       blacklist: 'DNF*'
-      name_format: '%f_iBoM'
+      name_format: 'Interactive-BoM'
   
-  - name: 'schematic (core)'
+  - name: 'schematic'
     type: pdf_sch_print
     dir: .
     options:
-      variant: core
+      variant: %variant
       output: Schematic.pdf

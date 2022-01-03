@@ -27,76 +27,80 @@ jobs:
       with:
         name: Full.zip
         path: Full
-  
-  # Build-PSRAM:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - uses: INTI-CMNB/KiBot@v1
-  #     with:
-  #       config: jlcpcb.psram.config.kibot.yaml
-  #       dir: PSRAM
-  #       schema: 'meshtastic-diy.sch'
-  #       board: 'meshtastic-diy.kicad_pcb'
-  #   - name: Show artifacts # For diagnostics
-  #     run: ls -lR 
-  #   - name: Upload artifacts
-  #     uses: actions/upload-artifact@v2
-  #     with:
-  #       name: PSRAM.zip
-  #       path: PSRAM
-
-  # Build-AutoProg:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - uses: INTI-CMNB/KiBot@v1
-  #     with:
-  #       config: jlcpcb.psram.config.kibot.yaml
-  #       dir: AutoProg
-  #       schema: 'meshtastic-diy.sch'
-  #       board: 'meshtastic-diy.kicad_pcb'
-  #   - name: Show artifacts # For diagnostics
-  #     run: ls -lR 
-  #   - name: Upload artifacts
-  #     uses: actions/upload-artifact@v2
-  #     with:
-  #       name: AutoProg.zip
-  #       path: AutoProg
 
   Build-Core:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Replace variant token
+      run: sed -i 's/%variant/core/g' jlcpcb.variant.config.kibot.yaml
     - uses: INTI-CMNB/KiBot@v1
       with:
-        config: jlcpcb.core.config.kibot.yaml
-        dir: Core
+        config: jlcpcb.variant.config.kibot.yaml
+        dir: variant
         schema: 'meshtastic-diy.sch'
         board: 'meshtastic-diy.kicad_pcb'
     - name: Show artifacts # For diagnostics
       run: ls -lR 
     - name: Zip variant artifacts
-      run: zip NoPSRAM+NoAuto-Prog.zip ./Core/* -r
+      run: zip NoPSRAM+NoAuto-Prog.zip ./variant/* -r --junk-paths
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
         name: NoPSRAM+NoAuto-Prog.zip
         path: ./
+  
+  Build-PSRAM:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Replace variant token
+      run: sed -i 's/%variant/psram/g' jlcpcb.variant.config.kibot.yaml
+    - uses: INTI-CMNB/KiBot@v1
+      with:
+        config: jlcpcb.variant.config.kibot.yaml
+        dir: variant
+        schema: 'meshtastic-diy.sch'
+        board: 'meshtastic-diy.kicad_pcb'
+    - name: Show artifacts # For diagnostics
+      run: ls -lR 
+    - name: Zip variant artifacts
+      run: zip NoAuto-Prog.zip ./variant/* -r --junk-paths
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: NoAuto-Prog.zip
+        path: ./
+
+  Build-AutoProg:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Replace variant token
+      run: sed -i 's/%variant/autoprog/g' jlcpcb.variant.config.kibot.yaml
+    - uses: INTI-CMNB/KiBot@v1
+      with:
+        config: jlcpcb.variant.config.kibot.yaml
+        dir: variant
+        schema: 'meshtastic-diy.sch'
+        board: 'meshtastic-diy.kicad_pcb'
+    - name: Show artifacts # For diagnostics
+      run: ls -lR 
+    - name: Zip variant artifacts
+      run: zip NoAuto-Prog.zip ./variant/* -r --junk-paths
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: NoPSRAM.zip
+        path: ./  
     
   Release-Artifacts:
     name: Release Artifacts
     runs-on: ubuntu-latest
     env:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-      # NO_PSRAM_VARIANT: 'autoprog'
-      # NO_PSRAM_FILE_LABEL: '(No PSRAM)'
-      # NO_AUTO_PROG_VARIANT: 'psram'
-      # NO_AUTO_PROG_FILE_LABEL: '(No Auto-prog)'
-      # NO_PSRAM_NO_AUTO_PROG_VARIANT: 'core'
-      # NO_PSRAM_NO_AUTO_PROG_FILE_LABEL: '(No PSRAM No Auto-prog)'
 
-    needs: [Build-Full, Build-Core] #Build-PSRAM, Build-AutoProg]
+    needs: [Build-Full, Build-Core, Build-PSRAM, Build-AutoProg]
     steps:
       - uses: actions/checkout@v1
       - name: Set Major Version
@@ -122,6 +126,20 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: NoPSRAM+NoAuto-Prog.zip
+          path: ./
+
+      - name: Download No PSRAM
+        id: download_no_psram
+        uses: actions/download-artifact@master
+        with:
+          name: NoPSRAM.zip
+          path: ./
+
+      - name: Download No Auto-prog
+        id: download_no_auto_prog
+        uses: actions/download-artifact@master
+        with:
+          name: NoAuto-Prog.zip
           path: ./
       
       - name: Download full
@@ -246,4 +264,26 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./NoPSRAM+NoAuto-Prog.zip
           asset_name: NoPSRAM+NoAuto-Prog.${{ env.RELEASE_VERSION }}.zip
+          asset_content_type: application/zip
+      
+      - name: Upload No PSRAM
+        id: upload-release-no-psram 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./NoPSRAM.zip
+          asset_name: NoPSRAM.${{ env.RELEASE_VERSION }}.zip
+          asset_content_type: application/zip
+      
+      - name: Upload No Auto-prog
+        id: upload-release-no-auto-prog 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./NoAuto-Prog.zip
+          asset_name: NoAuto-Prog.${{ env.RELEASE_VERSION }}.zip
           asset_content_type: application/zip
