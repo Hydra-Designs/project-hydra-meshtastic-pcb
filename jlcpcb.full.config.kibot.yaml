@@ -15,6 +15,12 @@ filters:
     exclude_refs:
       - U3
       - U1
+  - name: exclude_gps_power_enable
+    comment: 'Exclude GPS power switching from CPL'
+    type: generic
+    exclude_refs:
+      - R10
+      - R16
 
 variants:
   - name: 'default'
@@ -120,7 +126,9 @@ outputs:
     type: position
     options:
       variant: rotated
-      dnf_filter: 'exclude_e22_and_esp32'
+      dnf_filter:
+        - 'exclude_e22_and_esp32'
+        - 'exclude_gps_power_enable'
       output: '%f_cpl_jlc.%x'
       format: CSV
       units: millimeters
