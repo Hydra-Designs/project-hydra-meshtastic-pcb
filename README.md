@@ -25,7 +25,7 @@ A minimalist PCB design built around the Ebyte E22-900M30S 30dbm (1 watt) LoRA r
 
 ## Project status
 - V1 has been assembled and is working fine. Gerbers are OK, no errors! Production files not verified and tested!
-- Initial concept idea of V2 has been published, introduces breaking changes.
+- Initial concept of V2 has been published, introduces breaking changes.
 - Production file generation has not been verified yet, still needs some cleanup.
 - Core PCB KiCad footprint and schematic symbol will be available afer the official V2 release.
 
