@@ -16,11 +16,13 @@ filters:
       - U3
       - U1
   - name: exclude_gps_power_enable
-    comment: 'Exclude GPS power switching from CPL'
+    comment: 'Exclude GPS power switching (and J1+J2)'
     type: generic
     exclude_refs:
       - R10
       - R16
+      - J1
+      - J2
 
 variants:
   - name: 'default'
@@ -114,13 +116,6 @@ outputs:
         - from_output: JLCPCB_drill
           dest: /
 
-  - name: 'interactive_bom (default)'
-    comment: "Interactive Bill of Materials (HTML)"
-    type: ibom
-    options:
-      blacklist: 'DNF*'
-      name_format: '%f_iBoM'
-
   - name: 'position (default)'
     comment: "Pick and place file, JLC style"
     type: position
@@ -167,6 +162,15 @@ outputs:
         hide_pcb_info: true
         hide_stats_info: true
         quote_all: true
+
+  - name: 'interactive_bom (default)'
+    comment: "Interactive Bill of Materials (HTML)"
+    type: ibom
+    options:
+      blacklist: 'DNF*'
+      dnf_filter:
+        - 'exclude_gps_power_enable'
+      name_format: '%f_iBoM'
         
   - name: 'schematic (full)'
     comment: "Print schematic (PDF)"

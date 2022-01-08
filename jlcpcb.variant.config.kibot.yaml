@@ -15,11 +15,13 @@ filters:
       - U3
       - U1
   - name: exclude_gps_power_enable
-    comment: 'Exclude GPS power switching from CPL'
+    comment: 'Exclude GPS power switching (and J1+J2)'
     type: generic
     exclude_refs:
       - R10
       - R16
+      - J1
+      - J2
 
 variants:
   - name: '%variant'
@@ -89,6 +91,8 @@ outputs:
     options:
       variant: %variant
       blacklist: 'DNF*'
+      dnf_filter:
+        - 'exclude_gps_power_enable'
       output: 'Interactive-BoM.html'
   
   - name: 'schematic'
