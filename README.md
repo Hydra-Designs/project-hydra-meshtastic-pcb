@@ -1,7 +1,7 @@
 # Project Hydra (Meshtastic PCB)
 
 [![Build Artifacts](https://github.com/PlumRugOfDoom/project-hydra-meshtastic-pcb/actions/workflows/build-release-artifacts.yml/badge.svg)](https://github.com/PlumRugOfDoom/project-hydra-meshtastic-pcb/actions/workflows/build-release-artifacts.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 
 A minimalist PCB design built around the Ebyte E22-900M30S 30dbm (1 watt) LoRA radio and the ESP32-WROOM-32U cpu compatible with the [Meshtastic-device](https://github.com/meshtastic/Meshtastic-device) firmware. 
@@ -48,6 +48,6 @@ Please contribute using [Github Flow](https://guides.github.com/introduction/flo
 Please [open an issue](https://github.com/PlumRugOfDoom/project-hydra-meshtastic-pcb/issues/new) for support.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[GPL v3](https://choosealicense.com/licenses/gpl-3.0/)
 
 [Meshtastic](https://meshtastic.org/)® is a registered trademark of Geeksville Industries LLC. Meshtastic software components are released under various licenses, see github for details. No warranty is provided - use at your own risk.
