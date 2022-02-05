@@ -120,7 +120,14 @@ jobs:
       - name: Set Release Version
         id: set_release_version
         run: echo ::set-env name=RELEASE_VERSION::${{ steps.major_version.outputs.value }}.${{ steps.minor_version.outputs.value }}
-         
+        
+      - uses: dev-drprasad/delete-tag-and-release@v0.2.0
+        with:
+          delete_release: true
+          tag_name: ${{ env.RELEASE_VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Download core
         id: download_core
         uses: actions/download-artifact@master
