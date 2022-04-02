@@ -179,6 +179,7 @@ outputs:
     dir: .
     options:
       output: Schematic.pdf
+      
   - name: 'svg pcb (full)'
     comment: "Print schematic (PDF)"
     type: svg_pcb_print
