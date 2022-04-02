@@ -228,6 +228,16 @@ jobs:
           asset_content_type: application/pdf
       
       # RENDERS
+      - name: Upload Release SVG
+        id: upload-release-svh
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./PCB.svg
+          asset_name: PCB.${{ env.RELEASE_VERSION }}.svg
+          asset_content_type: text/xml
         
       - name: Upload Release STP
         id: upload-release-stp 
