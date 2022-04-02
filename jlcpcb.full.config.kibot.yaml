@@ -190,10 +190,7 @@ outputs:
       # Note: a more generic approach is to use 'copper' but then the filenames
       # are slightly different.
       - F.Cu
-      - B.Cu
       - F.SilkS
-      - B.SilkS
       - F.Mask
-      - B.Mask
       - Edge.Cuts
       
