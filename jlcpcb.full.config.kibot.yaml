@@ -170,6 +170,7 @@ outputs:
       blacklist: 'DNF*'
       dnf_filter:
         - 'exclude_gps_power_enable'
+        
       name_format: '%f_iBoM'
         
   - name: 'schematic (full)'
@@ -178,3 +179,10 @@ outputs:
     dir: .
     options:
       output: Schematic.pdf
+  - name: 'svg pcb (full)'
+    comment: "Print schematic (PDF)"
+    type: svg_pcb_print
+    dir: .
+    options:
+      output: PCB.svg
+      
