@@ -190,10 +190,10 @@ outputs:
       style:
         # Meshtastic green #67EA94
         clad: "#9c6b28"
-        copper: "#417e5a"
+        copper: "#c18b30"
         board: "#242424"
-        silk: "#f0f0f0"
-        pads: "#b5ae30"
+        #silk: "#f0f0f0"
+        pads: "#ccc"
         outline: "#000000"
         highlight-on-top: false
         highlight-style: stroke:none;fill:#ff0000;opacity:0.5;
