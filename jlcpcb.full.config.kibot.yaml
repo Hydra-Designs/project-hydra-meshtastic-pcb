@@ -179,18 +179,26 @@ outputs:
     dir: .
     options:
       output: Schematic.pdf
-      
+
   - name: 'svg pcb (full)'
     comment: "Print schematic (PDF)"
-    type: svg_pcb_print
+    type: pcbdraw
     dir: .
     options:
       output: PCB.svg
-    layers:
-      # Note: a more generic approach is to use 'copper' but then the filenames
-      # are slightly different.
-      - F.Cu
-      - F.SilkS
-      - F.Mask
-      - Edge.Cuts
+      format: svg
+    style:
+      # Meshtastic green #67EA94
+      - clad: "#9c6b28"
+      - copper: "#417e5a"
+      - board: "#242424"
+      - silk: "#f0f0f0"
+      - pads: "#b5ae30"
+      - outline: "#000000"
+      - highlight-on-top: false
+      - highlight-style: stroke:none;fill:#ff0000;opacity:0.5;
+      - highlight-padding: 1.5
+      - highlight-offset: 0
+
+      
       
