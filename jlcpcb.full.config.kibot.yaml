@@ -189,10 +189,10 @@ outputs:
       format: svg
       style:
 
-        clad: "#9c6b28"
+        clad: "#242424"
         copper: "#c18b30"
         board: "#242424"
-        silk: "#f0f0f0"
+        silk: "#242424"
         pads: "#CCCCCC"
         outline: "#000000"
 #         highlight-on-top: false
