@@ -193,7 +193,7 @@ outputs:
         copper: "#242424"
         board: "#242424"
         silk: "#242424"
-        pads: "#CCCCCC"
+        pads: "#c18b30"
         outline: "#c18b30"
         highlight-on-top: false
         highlight-style: stroke:none;fill:#ff0000;opacity:0.5;
