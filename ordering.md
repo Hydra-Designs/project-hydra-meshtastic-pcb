@@ -1,7 +1,7 @@
 # Ordering from JLCPCB
 
 
-Download the Gerber-JLCPCB.{version}.zip file and the .zip file of the desired variant from the [Release] (https://github.com/Hydra-Designs/project-hydra-meshtastic-pcb/releases/tag/2.1) and extract it to a local folder.
+Download the Gerber-JLCPCB.{version}.zip file and the .zip file of the desired variant from the [Release](https://github.com/Hydra-Designs/project-hydra-meshtastic-pcb/releases/tag/2.1) and extract it to a local folder.
 ![image](https://user-images.githubusercontent.com/9000580/166714337-6639de76-8187-4cde-bb4a-ed1b411a9ce4.png)
 
 Navgate to https://cart.jlcpcb.com/quote to start an order by uploading the gerber zip file.
