@@ -30,4 +30,4 @@ After this process is complete, you can choose shipping and payment method at th
 
 # Final assembly 
 
-Ebyte E22-900M30S and ESP32-WROOM-32U modules as well as any out of stock parts will need to be purchased from LCSC or a preferred vendor. You will be responsible for [hand soldering](README.md#assembly-instructions) these components onto the board. Use the iBoM html file for component placement assistance.
+Ebyte E22-900M30S and ESP32-WROOM-32UE-N16 modules as well as any out of stock parts will need to be purchased from LCSC or a preferred vendor. You will be responsible for [hand soldering](README.md#assembly-instructions) these components onto the board. Use the iBoM html file for component placement assistance.
