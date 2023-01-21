@@ -51,4 +51,4 @@ Please [open an issue](https://github.com/PlumRugOfDoom/project-hydra-meshtastic
 ## License
 [GPL v3](https://choosealicense.com/licenses/gpl-3.0/)
 
-[Meshtastic](https://meshtastic.org/)® is a registered trademark of Geeksville Industries LLC. Meshtastic software components are released under various licenses, see github for details. No warranty is provided - use at your own risk.
+[Meshtastic](https://meshtastic.org/)® is a registered trademark of Meshtastic LLC. Meshtastic software components are released under various licenses, see github for details. No warranty is provided - use at your own risk.
